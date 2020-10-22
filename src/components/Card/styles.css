@@ -1,0 +1,44 @@
+.card {
+    width: 100%;
+    min-height: 200px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card-header {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    height: 65px;
+    align-items: center;
+    border-bottom: solid 1px #f2f2f2;
+    color: #572e8b;
+    font-weight: bold;
+    justify-content: space-between;
+}
+
+.create-button {
+    background-color: #9c377c;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.create-button > span {
+    height: 41px;
+}
+
+.create-button:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
+}

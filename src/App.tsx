@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import Scaffold from './components/scaffold/Scaffold';
+import Scaffold from './components/Scaffold/Scaffold';
 
 function App() {
   return (

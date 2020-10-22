@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../../assets/img/logo.png';
+import Card from '../Card/Card';
 
 import './styles.css';
 
@@ -20,6 +21,7 @@ const Scaffold = () => {
             </header> 
             <div className="content">
                 Scaffold rocks!
+                <Card title="My Teams" hasCreateButton={true}></Card>
             </div>
             <footer>2020 - All rights reserved.</footer>
         </div>
