@@ -22,7 +22,6 @@ const Card = ({ title, hasCreateButton, children }: CardProps) => {
             <div className="card-content">
                 {children}
             </div>
-            Card rocks!
         </div>
     )
 }

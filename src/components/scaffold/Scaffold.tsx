@@ -1,10 +1,13 @@
 import React from 'react';
 import Logo from '../../assets/img/logo.png';
-import Card from '../Card/Card';
 
 import './styles.css';
 
-const Scaffold = () => {
+interface ScaffoldProps {
+    children?: any
+}
+
+const Scaffold = (props: ScaffoldProps) => {
     return (
         <div className="root">
             <header>
@@ -20,8 +23,7 @@ const Scaffold = () => {
                 </div>
             </header> 
             <div className="content">
-                Scaffold rocks!
-                <Card title="My Teams" hasCreateButton={true}></Card>
+                {props.children}
             </div>
             <footer>2020 - All rights reserved.</footer>
         </div>
