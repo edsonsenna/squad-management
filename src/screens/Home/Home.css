@@ -18,3 +18,14 @@
     height: 40px;
     border-right: solid 1px #dedede;
 }
+
+.squads-column,
+.top-five-column {
+    width: 650px;
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+}

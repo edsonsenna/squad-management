@@ -36,11 +36,11 @@
 }
 
 .most-picked-item {
-    left: 35px
+    left: 15%;
 }
 
 .less-picked-item {
-    right: 10px
+    right: 10%;
 }
 
 .most-picked-border {

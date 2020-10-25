@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from '../../../components/Card/Card';
-import './styles.css';
+import './TopFiveCard.css';
 
 const TopFiveCard = () => {
   return (

@@ -8,6 +8,7 @@ import {
 
 import './App.css';
 import Scaffold from './components/Scaffold/Scaffold';
+import Create from './screens/Create/Create';
 import Home from './screens/Home/Home';
 
 function App() {
@@ -16,12 +17,12 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Scaffold>
-            <Home></Home>
+            <Home />
           </Scaffold>
         </Route>
         <Route exact path="/create">
           <Scaffold>
-            <div>Create Page</div>
+            <Create />
           </Scaffold>
         </Route>
         <Redirect from='*' to='/' />

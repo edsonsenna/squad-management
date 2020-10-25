@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles.css';
+import './MostLessPickedCard.css';
 
 const MostLessPickedCard = () => {
     return (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaPen, FaShareAlt, FaSort, FaTrash } from 'react-icons/fa';
 
 import Card from '../../../components/Card/Card';
-import './styles.css';
+import './SquadsTable.css';
 
 const squadsArr = [
     {
@@ -71,7 +71,7 @@ const SquadsTable = () => {
     }
 
     return (
-        <Card className="squads-card" title='My Teams' hasCreateButton={true}>
+        <Card className="squads-card" title='My Teams' hasCreateButton={true} createRoute="create">
             <table>
               <thead>
                 <tr className='header-row'>

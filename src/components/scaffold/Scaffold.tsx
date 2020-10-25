@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../../assets/img/logo.png';
 
-import './styles.css';
+import './Scaffold.css';
 
 interface ScaffoldProps {
     children?: any

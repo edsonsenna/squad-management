@@ -3,7 +3,7 @@ import React from 'react';
 import SquadsTable from './SquadsTable/SquadsTable';
 import TopFiveCard from './TopFiveCard/TopFiveCard';
 import MostLessPickedCard from './MostLessPickedCard/MostLessPickedCard';
-import './styles.css';
+import './Home.css';
 
 const Home = () => {
   return (

@@ -16,7 +16,11 @@
     color: #572e8b;
     font-weight: bold;
     justify-content: space-between;
-    font-size: 20px;
+    font-size: 25px;
+}
+
+.card-header a {
+    text-decoration: none;
 }
 
 .create-button {
