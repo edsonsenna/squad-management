@@ -20,7 +20,7 @@
 }
 
 .create-button {
-    background-color: #9c377c;
+    background: linear-gradient(180deg, rgba(166,57,123,1), rgba(130,51,129,1) 100%);
     color: white;
     width: 40px;
     height: 40px;

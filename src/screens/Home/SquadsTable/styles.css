@@ -92,6 +92,10 @@ tr > th {
     display: block;
 }
 
+.squads-card {
+    height: 100%;
+}
+
 /* End My Teams */
 
 

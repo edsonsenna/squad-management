@@ -2,6 +2,7 @@ import React from 'react';
 
 import SquadsTable from './SquadsTable/SquadsTable';
 import TopFiveCard from './TopFiveCard/TopFiveCard';
+import MostLessPickedCard from './MostLessPickedCard/MostLessPickedCard';
 import './styles.css';
 
 const Home = () => {
@@ -16,7 +17,7 @@ const Home = () => {
             <TopFiveCard />
           </div>
           <div className='row'>
-            <p>Most and Less picked player</p>
+            <MostLessPickedCard />
           </div>
         </div>
       </div>
