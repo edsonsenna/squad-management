@@ -1,5 +1,5 @@
 .card {
-    width: 50%;
+    width: 100%;
     min-height: 200px;
     background: white;
     border-radius: 10px;
@@ -7,7 +7,7 @@
 }
 
 .card-header {
-    padding: 0 25px;
+    padding: 10px 20px;
     display: flex;
     flex-direction: row;
     height: 65px;
@@ -45,5 +45,5 @@
 }
 
 .card-content {
-    padding: 20px;
+    padding: 20px 0px;
 }

@@ -1,0 +1,53 @@
+.squads-column,
+.top-five-column {
+    width: 47%;
+}
+
+.top-five-card {
+    height: 357px;
+}
+
+.top-five-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: #353535;
+    font-size: 14px;
+}
+
+.highest-age,
+.lowest-age {
+    width: 47%;
+}
+
+.highest-age-list,
+.lowest-age-list {
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: #e9e3e8;
+    padding: 5px 5px 2px 5px;
+}
+
+.highest-age-item,
+.lowest-age-item {
+    height: 35px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.highest-age-item:hover,
+.lowest-age-item:hover {
+    border: solid 1px #c50741;
+}
+
+.highest-age-value,
+.lowest-age-value {
+    text-align: right;
+}

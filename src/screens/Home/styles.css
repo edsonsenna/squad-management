@@ -1,28 +1,20 @@
-table {
-    width: 100%;
+.row {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.table-head {
-    text-align: left;
-    position: relative;
+.column {
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.sort-icon {
+.divider {
     position: absolute;
+    top: 10px;
     right: 0;
+    width: 1px;
+    height: 40px;
+    border-right: solid 1px #dedede;
 }
-
-#name-column {
-    width: 30%;
-    border-right: solid 1px #f2f2f2;
-}
-
-#description-column {
-    width: 70%;
-}
-
-#description-column,
-.description-cell {
-    padding: 15px;
-}
-

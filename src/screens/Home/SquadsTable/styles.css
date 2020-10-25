@@ -1,0 +1,99 @@
+
+/* My Teams */
+table {
+    width: 100%;
+    color: #353535;
+    border-collapse: collapse;
+}
+
+
+.table-head {
+    text-align: left;
+    position: relative;
+}
+
+.sort-icon {
+    position: absolute;
+    right: 0;
+}
+
+.sort-icon:hover {
+    cursor: pointer;
+}
+
+#name-header-cell {
+    width: 150px;
+}
+
+#name-header-cell > .sort-icon {
+    right: 15px;
+}
+
+#description-header-cell > .sort-icon {
+    right: 25px;
+}
+
+#description-header-cell {
+    width: auto;
+}
+
+#name-header-cell,
+#description-header-cell,
+.name-cell,
+.description-cell {
+    padding: 20px;
+}
+
+#name-header-cell,
+.name-cell {
+    padding-left: 25px;
+}
+
+#description-header-cell,
+.description-cell {
+    padding-right: 25px;
+}
+
+.description-cell {
+    position: relative;
+}
+
+.row-actions {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.action-icon {
+    margin: 0 5px;
+}
+
+.action-icon:hover {
+    cursor: pointer;
+}
+
+tr,
+tr > th {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.item-row {
+    border-bottom: solid 1px #f2f2f2;
+}
+
+.item-row:hover {
+    color: #c16499;
+    background-color: #f7eef7;
+}
+
+.item-row:hover > .description-cell > .row-actions {
+    display: block;
+}
+
+/* End My Teams */
+
+
+
+

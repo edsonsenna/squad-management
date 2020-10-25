@@ -3,14 +3,15 @@ import React from 'react';
 import './styles.css';
 
 interface CardProps {
+    className?: String,
     title: String,
     hasCreateButton?: boolean,
     children?: any
 }
 
-const Card = ({ title, hasCreateButton, children }: CardProps) => {
+const Card = ({ className, title, hasCreateButton, children }: CardProps) => {
     return(
-        <div className="card">
+        <div className={`card ${className ? className : ''}`}>
             <div className="card-header">
                 <span>{title}</span>
                 { hasCreateButton && (
