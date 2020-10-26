@@ -68,18 +68,152 @@ const Create = () => {
                         </select>
 
                         <div className="squad-formation-field">
-                            <div className="squad-middle"></div>
                             <div className="squad-middle-circle"></div>
+                            <div className="squad-middle"></div>
+                            <div className="squad-spots">
+                                <div className="squad-spots-row">
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="squad-spots-row">
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="squad-spots-row">
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="squad-spots-row">
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="squad-spots-row">
+                                    <div className="spots-col">
+                                        <div className="spot-border">
+                                            <div className="spot-text">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
+
                 <div className="second-column">
                     <div className="input-field">
                         <label htmlFor="search-name"><b>Search Players</b></label>
                         <input id="search-name" type="text" placeholder="Player name" className="search-name-input"/>
                     </div>
                     <div className="search-results">
-                        <div className="search-results-item">
+                        <div className="search-results-item" draggable="true">
                             <div className="first-item-row">
                                 <div>
                                     <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
@@ -92,7 +226,7 @@ const Create = () => {
                                 <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
                             </div>
                         </div>
-                        <div className="search-results-item">
+                        <div className="search-results-item" draggable="true">
                             <div className="first-item-row">
                                 <div>
                                     <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
@@ -105,7 +239,7 @@ const Create = () => {
                                 <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
                             </div>
                         </div>
-                        <div className="search-results-item">
+                        <div className="search-results-item" draggable="true">
                             <div className="first-item-row">
                                 <div>
                                     <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
@@ -118,7 +252,7 @@ const Create = () => {
                                 <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
                             </div>
                         </div>
-                        <div className="search-results-item">
+                        <div className="search-results-item" draggable="true">
                             <div className="first-item-row">
                                 <div>
                                     <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
@@ -131,7 +265,7 @@ const Create = () => {
                                 <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
                             </div>
                         </div>
-                        <div className="search-results-item">
+                        <div className="search-results-item" draggable="true">
                             <div className="first-item-row">
                                 <div>
                                     <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
@@ -144,7 +278,7 @@ const Create = () => {
                                 <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
                             </div>
                         </div>
-                        <div className="search-results-item">
+                        <div className="search-results-item" draggable="true">
                             <div className="first-item-row">
                                 <div>
                                     <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
@@ -157,7 +291,7 @@ const Create = () => {
                                 <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
                             </div>
                         </div>
-                        <div className="search-results-item">
+                        <div className="search-results-item" draggable="true">
                             <div className="first-item-row">
                                 <div>
                                     <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
