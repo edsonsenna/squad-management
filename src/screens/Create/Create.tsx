@@ -307,6 +307,11 @@ const Create = () => {
                     </div>
                 </div>
             </div>
+            <div className="actions-row">
+                <div className="submit-button">
+                    <b>Save</b>
+                </div> 
+            </div> 
         </Card>
     )
 }

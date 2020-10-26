@@ -4,6 +4,7 @@
     min-height: 100vh;
     background-color: #f7f3f7;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .content {
