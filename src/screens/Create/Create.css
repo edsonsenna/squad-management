@@ -80,10 +80,14 @@ select {
 
 .description-input {
     height: 203px;
+    width: 100%;
+    resize: none;
 }
 
 .tags-input {
     height: 135px;
+    width: 100%;
+    resize: none;
 }
 
 .squad-formation > label {
@@ -196,6 +200,12 @@ select {
     justify-content: center;
 }
 
+.actions-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .submit-button {
     width: 320px;
     background: linear-gradient(180deg, rgba(151,52,126,1), rgba(126,46,127,1) 100%);
@@ -211,3 +221,4 @@ select {
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
 }
+
