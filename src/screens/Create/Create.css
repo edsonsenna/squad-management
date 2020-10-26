@@ -1,0 +1,79 @@
+input[type='text'] {
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  padding: 2px 10px;
+  height: 27.5px;
+}
+
+.input-field {
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.input-field > label {
+    margin-bottom: 10px;
+}
+
+.description-input,
+.tags-input {
+    border: 1px solid #dadada;
+    border-radius: 5px;
+    padding: 10px;
+    height: 100px;
+    font-size: 14px;
+}
+
+.editable-field > .editable-label {
+    margin-bottom: 10px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-info-title {
+  width: 100%;
+  justify-content: center;
+  font-size: 18px;
+  text-align: center;
+  color: #8d8d8d;
+  margin: 10px 0 50px 0;
+}
+
+.team-info-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 950px;
+}
+
+.first-column,
+.second-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 400px;
+}
+
+.radio-group-wrapper {
+    margin-bottom: 20px;
+}
+
+.team-type-label {
+    margin-bottom: 10px;
+}
+
+.real-option-label {
+    margin-right: 50px;
+}
+
+.description-input {
+    height: 203px;
+}
+
+.tags-input {
+    height: 135px;
+}
