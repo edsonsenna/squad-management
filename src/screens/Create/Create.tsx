@@ -21,6 +21,16 @@ const defaultValues = {
   formation: '3-2-2-3'
 };
 
+type FormData = {
+  id: String;
+  name: String;
+  description: String;
+  website: String;
+  tags: String;
+  type: String;
+  formation: String;
+};
+
 interface CreateProps {
   squad?: Squad;
 }
@@ -36,7 +46,7 @@ interface RouteProps {
 }
 
 const Create = () => {
-  const { register, handleSubmit, watch, reset } = useForm({ defaultValues });
+  const { register, handleSubmit, watch, reset, errors } = useForm<FormData>({ defaultValues });
   const teamFormation = watch('formation');
 
   const [debounceTime, setDebounceTime] = useState(setTimeout(() => {}, 300));
@@ -296,7 +306,10 @@ const Create = () => {
               <input
                 id='name'
                 name='name'
-                ref={register}
+                ref={register({
+                  required: true
+                })}
+                style={{ borderColor: errors?.name ? 'red' : '#dadada' }}
                 type='text'
                 placeholder='Insert team name'
                 className='team-name-input'
@@ -324,7 +337,11 @@ const Create = () => {
               <input
                 id='website'
                 name='website'
-                ref={register}
+                ref={register({
+                  required: true,
+                  pattern: /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/i
+                })}
+                style={{ borderColor: errors?.website ? 'red' : '#dadada' }}
                 type='text'
                 placeholder='http://myteam.com'
                 className='team-website-input'
