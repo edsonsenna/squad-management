@@ -5,8 +5,7 @@ import Home from './Home';
 import { createStore } from 'redux';
 import squads from '../../reducers';
 import { Provider } from 'react-redux';
-import { MemoryRouter, Redirect, Route, Router, Switch } from 'react-router-dom';
-import Scaffold from '../../components/Scaffold/Scaffold';
+import { MemoryRouter } from 'react-router-dom';
 
 test("it has to render texts", () => {
 

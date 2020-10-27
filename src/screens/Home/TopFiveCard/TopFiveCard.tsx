@@ -66,7 +66,7 @@ const TopFiveCard = () => {
           <span className='highest-age-title'>
             <b>Highest avg age</b>
           </span>
-          <div className='highest-age-list'>
+          <div data-testid="highest-age-list" className='highest-age-list'>
             { displayHighestList()}
           </div>
         </div>
@@ -74,7 +74,7 @@ const TopFiveCard = () => {
           <span className='lowest-age-title'>
             <b>Lowest avg age</b>
           </span>
-          <div className='lowest-age-list'>
+          <div data-testid="lowest-age-list" className='lowest-age-list'>
             { displayLowestList() }
           </div>
         </div>

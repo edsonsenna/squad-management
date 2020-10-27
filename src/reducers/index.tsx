@@ -164,7 +164,6 @@ const INITIAL_STATE = {
 };
 
 const squads = (state: StateProps = INITIAL_STATE, action: ActionProps) => {
-    console.log('CallingReducer', action);
     switch(action.type) {
         case 'ADD_SQUAD':
             return { ...state, squads: [...state.squads, action.squad]};

@@ -2,10 +2,15 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import Scaffold from './Scaffold';
+import { MemoryRouter } from 'react-router-dom';
 
 test("it has to render texts", () => {
 
-    const { getByText } = render(<Scaffold />);
+    const { getByText } = render(
+        <MemoryRouter>
+            <Scaffold />
+        </MemoryRouter>
+    );
     expect(getByText("Squad Management Tool")).not.toBeNull();
     expect(getByText("John Doe")).not.toBeNull();
     expect(getByText("JD")).not.toBeNull();
