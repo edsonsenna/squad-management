@@ -1,16 +1,20 @@
 import React, { DragEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+// import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import Card from '../../components/Card/Card';
 import './Create.css';
-import { PlayerProps, Squad } from '../../shared/Interfaces';
+import { PlayerProps, Squad, SquadPlayerProps } from '../../shared/Interfaces';
 
-const API_URL = 'https://api-football-v1.p.rapidapi.com/v2/players/search/';
+// const API_URL = 'https://api-football-v1.p.rapidapi.com/v2/players/search/';
 
 const defaultValues = {
+  name: '',
+  description: '',
+  website: '',
+  tags: '',
   type: 'real',
   formation: '3-2-2-3',
 };
@@ -25,17 +29,38 @@ interface TeamFormationProps {
   player: PlayerProps;
 }
 
+interface RouteProps {
+    squad?: Squad
+}
+
 const Create = ({ squad }: CreateProps) => {
-  const { register, handleSubmit, watch } = useForm({ defaultValues });
+  const { register, handleSubmit, watch, reset } = useForm({ defaultValues });
   const teamFormation = watch('formation');
 
   const [debounceTime, setDebounceTime] = useState(setTimeout(() => {}, 300));
   const [players, setPlayers] = useState<PlayerProps[]>([]);
   const [teamFormationPlayers, setTeamFormationPlayers] = useState<
-    TeamFormationProps[]
+    SquadPlayerProps[]
   >([]);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation<RouteProps>();
+
+  useEffect(() => {
+    console.log(location.state);
+    const state: RouteProps = location.state;
+    const squad = state.squad;
+    console.log(squad);
+    reset({
+        name: squad?.name,
+        description: squad?.description,
+        website: squad?.website,  
+        tags: squad?.tags,
+        type: squad?.type,
+        formation: squad?.formation
+    });
+    setTeamFormationPlayers(squad?.players ? squad.players : []);
+  }, []);
 
   useEffect(() => {
     console.log('Receiving Squad', squad);
@@ -47,7 +72,7 @@ const Create = ({ squad }: CreateProps) => {
 
   const onSubmit = (data: Object) => {
     console.log('Handle Submit!!', data);
-    dispatch({ type: 'ADD_SQUAD', squad: data });
+    dispatch({ type: 'ADD_SQUAD', squad: {...data, players: teamFormationPlayers} });
     history.push('/');
   };
 
@@ -168,7 +193,7 @@ const Create = ({ squad }: CreateProps) => {
     const playerPosition = teamFormationPlayers.find(
       (position) => position.row === row && position.column === column
     );
-    if (playerPosition) {
+    if (playerPosition?.player) {
       const splittedName = playerPosition.player.player_name.split(/\s/g);
       console.log(splittedName);
       const initials = `${splittedName[0] ? splittedName[0][0] : ''}${splittedName[1] ? splittedName[1][0] : ''}`;

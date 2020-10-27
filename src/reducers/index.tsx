@@ -7,12 +7,16 @@ const INITIAL_STATE = {
             description: 'Barcelona Squad',
             website: 'https://barcelona.com.br',
             type: 'real',
+            tags: '',
+            formation: '2-4-4',
             players: [
                 {
-                    id: '32424dsfsdf',
-                    name: 'Cristiano Ronaldo',
-                    age: 32,
-                    nacionality: 'Portugal',
+                    player: {
+                        player_id: 321,
+                        player_name: 'Cristiano Ronaldo',
+                        age: 32,
+                        nacionality: 'Portugal',
+                    },
                     row: 1,
                     column: 1
                 }
@@ -22,13 +26,19 @@ const INITIAL_STATE = {
             name: 'Real Madrid',
             description: 'Real Madrid Squad',
             website: 'https://real-madrid.com',
-            type: 'real'
+            type: 'real',
+            tags: '',
+            formation: '2-4-4',
+            players: []
         },
         {
             name: 'PSG',
             description: 'PSG Squad',
             website: 'https://psg.com',
-            type: 'real'
+            type: 'real',
+            tags: '',
+            formation: '2-4-4',
+            players: []
         }
     ]
 };

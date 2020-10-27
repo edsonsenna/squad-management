@@ -3,6 +3,9 @@ export interface Squad {
   description: String;
   website: String;
   type: String;
+  tags: String;
+  formation: String ;
+  players: SquadPlayerProps[];
 }
 
 export interface ActionProps {
@@ -13,6 +16,12 @@ export interface ActionProps {
 export interface StateProps {
   squads: Squad[];
 };
+
+export interface SquadPlayerProps {
+  player: PlayerProps;
+  row: Number;
+  column: Number;
+}
 
 export interface PlayerProps {
   player_id: Number;

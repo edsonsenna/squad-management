@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import SquadsTable from './SquadsTable/SquadsTable';
@@ -12,6 +12,10 @@ import { StateProps } from '../../shared/Interfaces';
 const Home = () => {
 
   const squads = useSelector((state: StateProps) => state.squads);
+
+  useEffect(() => {
+    console.log(squads);
+  }, [squads]);
 
   return (
     <div>

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { FaPen, FaShareAlt, FaSort, FaTrash } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 
 import Card from '../../../components/Card/Card';
 import { Squad } from '../../../shared/Interfaces';
@@ -10,11 +11,18 @@ interface SquadsTableProps {
 }
 
 const SquadsTable = ({ squadsList }: SquadsTableProps) => {
+
+  const history = useHistory();
   const [squads, setSquads] = useState(squadsList);
 
   useEffect(() => {
     setSquads(squadsList);
   }, [squadsList]);
+
+  const handleEditClick = (event: MouseEvent, squad: Squad) => {
+    event.preventDefault();
+    history.push('/create', { squad })
+  }
 
   const renderSquadsList = () => {
     if (squads.length) {
@@ -26,7 +34,7 @@ const SquadsTable = ({ squadsList }: SquadsTableProps) => {
             <div className='row-actions'>
               <FaTrash fontWeight={200} className='action-icon' />
               <FaShareAlt className='action-icon' />
-              <FaPen className='action-icon' />
+              <FaPen className='action-icon' onClick={(event) => handleEditClick(event, squad)}/>
             </div>
           </td>
         </tr>
