@@ -218,10 +218,34 @@ select {
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.5s;
+    border: unset;
 }
 
 .submit-button:hover {
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
+}
+
+@media screen and (max-width: 1100px) {
+    .team-info-row,
+    .squad-config-row {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .first-column,
+    .second-column {
+        width: calc(100% - 20px);
+    }
+
+    .second-column {
+        margin-top: 15px;
+    }
+
+    .description-input,
+    .tags-input {
+        width: calc(100% - 20px);
+    }
 }
 
