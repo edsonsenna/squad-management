@@ -1,4 +1,5 @@
 export interface Squad {
+  id: String;
   name: String;
   description: String;
   website: String;

@@ -11,6 +11,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.6",
+    "@types/uuid": "^8.3.0",
     "axios": "^0.21.0",
     "mutationobserver-shim": "^0.3.7",
     "react": "^17.0.0",
@@ -19,7 +20,8 @@
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.4",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "uuid": "^8.3.1"
   },
   "scripts": {
     "start": "react-scripts start",

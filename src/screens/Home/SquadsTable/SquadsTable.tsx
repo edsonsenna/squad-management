@@ -27,7 +27,7 @@ const SquadsTable = ({ squadsList }: SquadsTableProps) => {
   const renderSquadsList = () => {
     if (squads.length) {
       return squads.map((squad) => (
-        <tr key={`${squad.name}`} className='item-row'>
+        <tr key={`${squad.id}`} className='item-row'>
           <td className='name-cell'>{squad.name}</td>
           <td className='description-cell'>
             <span>{squad.description}</span>

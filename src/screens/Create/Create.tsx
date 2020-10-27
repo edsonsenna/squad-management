@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 // import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { v4 } from 'uuid';
 
 import Card from '../../components/Card/Card';
 import './Create.css';
@@ -11,12 +12,13 @@ import { PlayerProps, Squad, SquadPlayerProps } from '../../shared/Interfaces';
 // const API_URL = 'https://api-football-v1.p.rapidapi.com/v2/players/search/';
 
 const defaultValues = {
+  id: '',
   name: '',
   description: '',
   website: '',
   tags: '',
   type: 'real',
-  formation: '3-2-2-3',
+  formation: '3-2-2-3'
 };
 
 interface CreateProps {
@@ -33,7 +35,7 @@ interface RouteProps {
     squad?: Squad
 }
 
-const Create = ({ squad }: CreateProps) => {
+const Create = () => {
   const { register, handleSubmit, watch, reset } = useForm({ defaultValues });
   const teamFormation = watch('formation');
 
@@ -47,34 +49,41 @@ const Create = ({ squad }: CreateProps) => {
   const location = useLocation<RouteProps>();
 
   useEffect(() => {
-    console.log(location.state);
     const state: RouteProps = location.state;
-    const squad = state.squad;
-    console.log(squad);
-    reset({
-        name: squad?.name,
-        description: squad?.description,
-        website: squad?.website,  
-        tags: squad?.tags,
-        type: squad?.type,
-        formation: squad?.formation
-    });
-    setTeamFormationPlayers(squad?.players ? squad.players : []);
-  }, []);
+    if(state) {
+        const squad = state.squad;
+        console.log(JSON.stringify(squad));
+        reset({
+            id: squad?.id,
+            name: squad?.name,
+            description: squad?.description,
+            website: squad?.website,  
+            tags: squad?.tags,
+            type: squad?.type,
+            formation: squad?.formation
+        });
+        setTeamFormationPlayers(squad?.players ? squad.players : []);
+    }
+  }, [location.state, reset]);
 
-  useEffect(() => {
-    console.log('Receiving Squad', squad);
-  }, [squad]);
 
   useEffect(() => {
     console.log(teamFormationPlayers);
   }, [teamFormationPlayers])
 
-  const onSubmit = (data: Object) => {
-    console.log('Handle Submit!!', data);
-    dispatch({ type: 'ADD_SQUAD', squad: {...data, players: teamFormationPlayers} });
+  const onSubmit = (data: any) => {
+    if(data.id) {
+        dispatch({ type: 'UPDATE_SQUAD', squad: {...data, players: teamFormationPlayers} });
+    } else {
+        data.id = v4();
+        dispatch({ type: 'ADD_SQUAD', squad: {...data, players: teamFormationPlayers} });
+    }
     history.push('/');
   };
+
+  const handleFormationChange = () => {
+      setTeamFormationPlayers([]);
+  }
 
   const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (debounceTime) {
@@ -186,7 +195,6 @@ const Create = ({ squad }: CreateProps) => {
     );
     filteredPlayer.push({ row, column, player });
     setTeamFormationPlayers(filteredPlayer);
-    // ev?.currentTarget?.appendChild(document.getElementById(data));
   };
 
   const searchPlayerInPosition = (row: Number, column: Number) => {
@@ -286,6 +294,7 @@ const Create = ({ squad }: CreateProps) => {
   return (
     <Card title='Create your team'>
       <form onSubmit={handleSubmit(onSubmit)}>
+          <input type="text" name="id" ref={register} hidden/>
         <div className='team-info-title'>
           <b>TEAM INFORMATION</b>
         </div>
@@ -391,7 +400,7 @@ const Create = ({ squad }: CreateProps) => {
               <label htmlFor='formation'>
                 <b>Formation</b>
               </label>
-              <select name='formation' id='formation' ref={register}>
+              <select name='formation' id='formation' ref={register} onChange={handleFormationChange}>
                 <option value='3-2-2-3'>3 - 2 - 2 - 3</option>
                 <option value='1-3-2-3'>3 - 2 - 3 - 1</option>
                 <option value='3-4-3'>3 - 4 - 3</option>

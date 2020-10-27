@@ -1,8 +1,10 @@
 import { ActionProps, StateProps } from "../shared/Interfaces";
+import { v4 } from 'uuid';
 
 const INITIAL_STATE = {
     squads: [
         {
+            id: v4(),
             name: 'Barcelona',
             description: 'Barcelona Squad',
             website: 'https://barcelona.com.br',
@@ -23,6 +25,7 @@ const INITIAL_STATE = {
             ]
         },
         {
+            id: v4(),
             name: 'Real Madrid',
             description: 'Real Madrid Squad',
             website: 'https://real-madrid.com',
@@ -32,6 +35,7 @@ const INITIAL_STATE = {
             players: []
         },
         {
+            id: v4(),
             name: 'PSG',
             description: 'PSG Squad',
             website: 'https://psg.com',
@@ -48,6 +52,8 @@ const squads = (state: StateProps = INITIAL_STATE, action: ActionProps) => {
     switch(action.type) {
         case 'ADD_SQUAD':
             return { ...state, squads: [...state.squads, action.squad]};
+        case 'UPDATE_SQUAD':
+            return { ...state, squads: [...state.squads.filter(squad => squad.id !== action.squad.id), action.squad]};
         default:
             return state;
     }
