@@ -81,22 +81,22 @@ const MostLessPickedCard = () => {
             <div className="most-picked-item">
                 <span className="less-picked-title"><b>Most picked player</b></span>
                 <div className="most-picked-border">
-                    <div className="most-picked-initials">
+                    <div className="most-picked-initials" data-testid="most-picked-initials">
                         <span>{getMostPickedInitials()}</span>
                     </div>
                 </div>
-                <div className="most-picked-percentage">
+                <div className="most-picked-percentage" data-testid="most-picked-percentage">
                     <b>{getMostPickedPercentage()}%</b>
                 </div>
             </div>
             <div className="less-picked-item">
                 <span className="less-picked-title"><b>Less picked player</b></span>
                 <div className="less-picked-border">
-                    <div className="less-picked-initials">
+                    <div className="less-picked-initials" data-testid="less-picked-initials">
                         <span>{getLessPickedInitials()}</span>
                     </div>
                 </div>
-                <div className="less-picked-percentage">
+                <div className="less-picked-percentage" data-testid="less-picked-percentage">
                     <b>{getLessPickedPercentage()}%</b>
                 </div>
             </div>
