@@ -1,3 +1,4 @@
+import { ActionProps, StateProps } from "../shared/Interfaces";
 
 const INITIAL_STATE = {
     squads: [
@@ -5,25 +6,31 @@ const INITIAL_STATE = {
             name: 'Barcelona',
             description: 'Barcelona Squad',
             website: 'https://barcelona.com.br',
+            type: 'real',
+            players: [
+                {
+                    id: '32424dsfsdf',
+                    name: 'Cristiano Ronaldo',
+                    age: 32,
+                    nacionality: 'Portugal',
+                    row: 1,
+                    column: 1
+                }
+            ]
+        },
+        {
+            name: 'Real Madrid',
+            description: 'Real Madrid Squad',
+            website: 'https://real-madrid.com',
+            type: 'real'
+        },
+        {
+            name: 'PSG',
+            description: 'PSG Squad',
+            website: 'https://psg.com',
             type: 'real'
         }
     ]
-};
-
-interface Squad {
-    name: String,
-    description: String,
-    website: String,
-    type: String
-}
-
-interface ActionProps {
-    type: String,
-    squad: Squad
-};
-
-interface StateProps {
-    squads: Squad[]
 };
 
 const squads = (state: StateProps = INITIAL_STATE, action: ActionProps) => {

@@ -1,21 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import SquadsTable from './SquadsTable/SquadsTable';
 import TopFiveCard from './TopFiveCard/TopFiveCard';
 import MostLessPickedCard from './MostLessPickedCard/MostLessPickedCard';
 import './Home.css';
-import { useSelector } from 'react-redux';
+import { StateProps } from '../../shared/Interfaces';
+
+
 
 const Home = () => {
 
-  const redux = useSelector(state => state);
+  const squads = useSelector((state: StateProps) => state.squads);
 
   return (
     <div>
-      { JSON.stringify(redux) }
       <div className='row'>
         <div className='column squads-column'>
-          <SquadsTable />
+          <SquadsTable squadsList={squads}/>
         </div>
         <div className='column top-five-column'>
           <div className='row'>

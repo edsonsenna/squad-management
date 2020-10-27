@@ -1,52 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPen, FaShareAlt, FaSort, FaTrash } from 'react-icons/fa';
 
 import Card from '../../../components/Card/Card';
+import { Squad } from '../../../shared/Interfaces';
 import './SquadsTable.css';
 
-const squadsArr = [
-    {
-        id: 1,
-        name: 'Barcelona',
-        description: 'Barcelona Squad'
-    },
-    {
-        id: 1,
-        name: 'Barcelona',
-        description: 'Barcelona Squad'
-    },
-    {
-        id: 1,
-        name: 'Barcelona',
-        description: 'Barcelona Squad'
-    },
-    {
-        id: 1,
-        name: 'Barcelona',
-        description: 'Barcelona Squad'
-    },
-    {
-        id: 1,
-        name: 'Barcelona',
-        description: 'Barcelona Squad'
-    },
-    {
-        id: 1,
-        name: 'Barcelona',
-        description: 'Barcelona Squad'
-    },
-    {
-        id: 1,
-        name: 'Barcelona',
-        description: 'Barcelona Squad'
-    },
-]
+interface SquadsTableProps {
+  squadsList: Squad[]
+}
 
 
-const SquadsTable = () => {
+const SquadsTable = ({ squadsList }: SquadsTableProps ) => {
 
-    const [squads, setSquads] = useState(squadsArr)
+    const [squads, setSquads] = useState(squadsList);
 
+    useEffect(() => {
+      setSquads(squadsList);
+    }, [squadsList]);
 
     const renderSquadsList = () => {
 

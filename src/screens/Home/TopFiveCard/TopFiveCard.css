@@ -9,6 +9,7 @@
     padding: 0 20px;
     color: #353535;
     font-size: 14px;
+    width: calc(100% - 40px);
 }
 
 .highest-age,

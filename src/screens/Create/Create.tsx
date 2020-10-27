@@ -1,9 +1,12 @@
-
-import React from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 import Card from '../../components/Card/Card';
 import './Create.css';
+import { PlayerProps } from '../../shared/Interfaces';
+
+const API_URL = 'https://api-football-v1.p.rapidapi.com/v2/players/search/';
 
 const defaultValues = {
     type: "real"
@@ -13,8 +16,59 @@ const Create = () => {
 
     const { register, handleSubmit } = useForm({ defaultValues });
 
+    const [debounceTime, setDebounceTime] = useState(setTimeout(() => {}, 300));
+    const [players, setPlayers] = useState([]);
+
     const onSubmit = (data: Object) => {
         console.log('Handle Submit!!', data);
+    }
+
+    const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
+
+        if(debounceTime) {
+            clearTimeout(debounceTime);
+            setDebounceTime(setTimeout(() => {}, 300));
+        }
+
+        const name = event?.currentTarget?.value;
+
+        if(name) {
+            
+            setDebounceTime(setTimeout(() => {
+                axios.get(`${API_URL}${name}`, { headers: {
+                    'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
+                    'x-rapidapi-key': '4bca5775a1msh257b6f1f625f7d4p1449eajsnc70830939a6f'
+                }})
+                .then((results) => { 
+                    console.log('[FetchingData]', results)
+                    setPlayers(results.data.api.players);
+                })
+                .catch((err) => console.error);
+            }, 300));
+        }
+        
+        
+    }
+
+    const displayPlayersList = () => {
+
+        if(players?.length) {
+            return (players.map((player: PlayerProps) => (
+                <div key={`${player.player_id}`} className="search-results-item" draggable="true">
+                    <div className="first-item-row">
+                        <div>
+                            <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">{player.player_name}</span>
+                        </div>
+                        <div>
+                            <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">{player.age}</span>
+                        </div>
+                    </div>
+                    <div className="second-item-row">
+                        <span className="nationality-label"><b>Nationality:</b></span>&nbsp;<span className="nationatily-value">{player.nationality}</span>
+                    </div>
+                </div>
+            )))
+        }
     }
 
     return (
@@ -224,100 +278,10 @@ const Create = () => {
                     <div className="second-column">
                         <div className="input-field">
                             <label htmlFor="search-name"><b>Search Players</b></label>
-                            <input id="search-name" type="text" placeholder="Player name" className="search-name-input"/>
+                            <input id="search-name" type="text" placeholder="Player name" className="search-name-input" onKeyUp={handleSearch}/>
                         </div>
                         <div className="search-results">
-                            <div className="search-results-item" draggable="true">
-                                <div className="first-item-row">
-                                    <div>
-                                        <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
-                                    </div>
-                                    <div>
-                                        <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">32</span>
-                                    </div>
-                                </div>
-                                <div className="second-item-row">
-                                    <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
-                                </div>
-                            </div>
-                            <div className="search-results-item" draggable="true">
-                                <div className="first-item-row">
-                                    <div>
-                                        <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
-                                    </div>
-                                    <div>
-                                        <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">32</span>
-                                    </div>
-                                </div>
-                                <div className="second-item-row">
-                                    <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
-                                </div>
-                            </div>
-                            <div className="search-results-item" draggable="true">
-                                <div className="first-item-row">
-                                    <div>
-                                        <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
-                                    </div>
-                                    <div>
-                                        <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">32</span>
-                                    </div>
-                                </div>
-                                <div className="second-item-row">
-                                    <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
-                                </div>
-                            </div>
-                            <div className="search-results-item" draggable="true">
-                                <div className="first-item-row">
-                                    <div>
-                                        <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
-                                    </div>
-                                    <div>
-                                        <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">32</span>
-                                    </div>
-                                </div>
-                                <div className="second-item-row">
-                                    <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
-                                </div>
-                            </div>
-                            <div className="search-results-item" draggable="true">
-                                <div className="first-item-row">
-                                    <div>
-                                        <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
-                                    </div>
-                                    <div>
-                                        <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">32</span>
-                                    </div>
-                                </div>
-                                <div className="second-item-row">
-                                    <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
-                                </div>
-                            </div>
-                            <div className="search-results-item" draggable="true">
-                                <div className="first-item-row">
-                                    <div>
-                                        <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
-                                    </div>
-                                    <div>
-                                        <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">32</span>
-                                    </div>
-                                </div>
-                                <div className="second-item-row">
-                                    <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
-                                </div>
-                            </div>
-                            <div className="search-results-item" draggable="true">
-                                <div className="first-item-row">
-                                    <div>
-                                        <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">Cristiano Ronaldo</span>
-                                    </div>
-                                    <div>
-                                        <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">32</span>
-                                    </div>
-                                </div>
-                                <div className="second-item-row">
-                                    <span className="nacionality-label"><b>Nacionality:</b></span>&nbsp;<span className="nacionatily-value">Portugal</span>
-                                </div>
-                            </div>
+                            { displayPlayersList() }
                         </div>
                     </div>
                 </div>
