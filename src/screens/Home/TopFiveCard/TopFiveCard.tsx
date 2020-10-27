@@ -16,30 +16,25 @@ const TopFiveCard = () => {
   const [squadsList, setSquadsList] = useState<SquadsListProps[]>([]);
   
   useEffect(() => {
+    const calculateAvgAge = () => {
+
+      const filteredSquads:SquadsListProps[] = squads.map(squadInStore => {
+        let totalAge = 0
+        squadInStore.players.map(playerInfo => totalAge += Number(playerInfo.player.age))
+        const avgAge = (totalAge / squadInStore.players.length) || 0;
+        return { avgAge, squad: squadInStore };
+      });
+  
+      setSquadsList(filteredSquads);
+  
+    }
     calculateAvgAge();
   }, [squads]);
-  
-  useEffect(() => {
-    console.log(squadsList);
-  }, [squadsList]);
-  
-  const calculateAvgAge = () => {
-
-    const filteredSquads:SquadsListProps[] = squads.map(squadInStore => {
-      let totalAge = 0
-      squadInStore.players.map(playerInfo => totalAge += Number(playerInfo.player.age))
-      const avgAge = (totalAge / squadInStore.players.length) || 0;
-      return { avgAge, squad: squadInStore };
-    });
-
-    setSquadsList(filteredSquads);
-
-  }
 
   const displayHighestList = () => {
     const sortedArr = squadsList.sort((firstSquad, secondSquad) => firstSquad.avgAge > secondSquad.avgAge ? -1 : 1);
     return sortedArr.map((squad) => (
-      <div className='highest-age-item'>
+      <div key={`highest_item_${squad.squad.id}`} className='highest-age-item'>
         <span className='team-name'>{squad.squad.name}</span>
         <span className='highest-age-value'>
           <b>{squad.avgAge.toFixed(1)}</b>
@@ -51,7 +46,7 @@ const TopFiveCard = () => {
   const displayLowestList = () => {
     const sortedArr = squadsList.sort((firstSquad, secondSquad) => firstSquad.avgAge > secondSquad.avgAge ? 1 : -1);
     return sortedArr.map((squad) => (
-      <div className='lowest-age-item'>
+      <div key={`lowest_item_${squad.squad.id}`} className='lowest-age-item'>
         <span className='team-name'>{squad.squad.name}</span>
         <span className='lowest-age-value'>
           <b>{squad.avgAge.toFixed(1)}</b>

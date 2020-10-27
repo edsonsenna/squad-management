@@ -52,7 +52,6 @@ const Create = () => {
     const state: RouteProps = location.state;
     if(state) {
         const squad = state.squad;
-        console.log(JSON.stringify(squad));
         reset({
             id: squad?.id,
             name: squad?.name,
@@ -66,10 +65,6 @@ const Create = () => {
     }
   }, [location.state, reset]);
 
-
-  useEffect(() => {
-    console.log(teamFormationPlayers);
-  }, [teamFormationPlayers])
 
   const onSubmit = (data: any) => {
     if(data.id) {
@@ -169,11 +164,6 @@ const Create = () => {
           //       },
           //     })
           //     .then((results) => {
-          //       console.log('[FetchingData]', results);
-          //       console.log(
-          //         '[Players]',
-          //         JSON.stringify(results.data.api.players)
-          //       );
           //       setPlayers(results.data.api.players);
           //     })
           //     .catch((err) => console.error);
@@ -203,7 +193,6 @@ const Create = () => {
     );
     if (playerPosition?.player) {
       const splittedName = playerPosition.player.player_name.split(/\s/g);
-      console.log(splittedName);
       const initials = `${splittedName[0] ? splittedName[0][0] : ''}${splittedName[1] ? splittedName[1][0] : ''}`;
       return initials;
     }
