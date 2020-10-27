@@ -30,7 +30,7 @@
     color: #fff;
     font-size: 18px;
     width: 185px;
-    height: 300px;
+    height: 130px;
     position: absolute;
     top: 25px;
 }
@@ -91,4 +91,32 @@
 
 .less-picked-percentage {
     right: 10px;
+}
+
+@media screen and (max-width: 540px) {
+    .most-picked-item{
+        width: 50%;
+        left: 10px;
+        top: calc(50% - 65px);
+        font-size: 14px;
+    }
+
+    .less-picked-item {
+        font-size: 14px;
+        width: 45%;
+        right: 0px;
+        top: calc(50% - 65px);
+    }
+
+    .less-picked-border{
+        margin-top: 25px;
+    }
+
+    .less-picked-initials,
+    .most-picked-border {
+        margin-top: 15px;
+        width: 80px;
+        height: 80px;
+    }
+
 }

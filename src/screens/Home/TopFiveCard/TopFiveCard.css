@@ -48,3 +48,9 @@
 .lowest-age-value {
     text-align: right;
 }
+
+.team-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

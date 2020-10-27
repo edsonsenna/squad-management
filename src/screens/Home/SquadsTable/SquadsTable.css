@@ -1,139 +1,146 @@
-
 /* My Teams */
 table {
-    width: 100%;
-    color: #353535;
-    border-collapse: collapse;
+  width: 100%;
+  color: #353535;
+  border-collapse: collapse;
 }
 
-
 .table-head {
-    text-align: left;
-    position: relative;
+  text-align: left;
+  position: relative;
 }
 
 .sort-icon {
-    position: absolute;
-    right: 0;
+  position: absolute;
+  right: 0;
 }
 
 .sort-icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #name-header-cell {
-    width: 150px;
+  width: 150px;
 }
 
 #name-header-cell > .sort-icon {
-    right: 15px;
+  right: 15px;
 }
 
 #description-header-cell > .sort-icon {
-    right: 25px;
+  right: 25px;
 }
 
 #description-header-cell {
-    width: auto;
+  width: auto;
 }
 
 #name-header-cell,
 #description-header-cell,
 .name-cell,
 .description-cell {
-    padding: 20px;
+  padding: 20px;
 }
 
 #name-header-cell,
 .name-cell {
-    padding-left: 25px;
+  padding-left: 25px;
 }
 
 #description-header-cell,
 .description-cell {
-    padding-right: 25px;
+  padding-right: 25px;
 }
 
 .description-cell {
-    position: relative;
+  position: relative;
 }
 
 .row-actions {
-    display: none;
-    position: absolute;
-    right: 20px;
-    top: 20px;
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .action-icon {
-    margin: 0 5px;
+  margin: 0 5px;
 }
 
 .action-icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 tr,
 tr > th {
-    font-size: 14px;
-    font-weight: 600;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .item-row {
-    border-bottom: solid 1px #f2f2f2;
+  border-bottom: solid 1px #f2f2f2;
 }
 
 .item-row:hover {
-    color: #c16499;
-    background-color: #f7eef7;
+  color: #c16499;
+  background-color: #f7eef7;
 }
 
 .item-row:hover > .description-cell > .row-actions {
-    display: block;
+  display: block;
 }
 
 .squads-card {
-    height: 100%;
+  height: 100%;
 }
 
 .tooltip {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  
-  .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-  }
+  position: relative;
+  display: inline-block;
+}
 
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 
+.tooltip .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
 
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 
+.name-cell,
+.description-cell {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+  #name-header-cell {
+    width: 40%;
+  }
+}

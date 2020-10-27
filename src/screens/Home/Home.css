@@ -24,8 +24,23 @@
     width: 600px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1280px) {
     .row {
         flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+    .squads-column {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        width: calc(100% - 20px);
+        padding: 40px 10px;
     }
 }
