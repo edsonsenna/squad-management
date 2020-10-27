@@ -32,7 +32,9 @@ const TopFiveCard = () => {
   }, [squads]);
 
   const displayHighestList = () => {
-    const sortedArr = squadsList.sort((firstSquad, secondSquad) => firstSquad.avgAge > secondSquad.avgAge ? -1 : 1);
+    const sortedArr = squadsList
+      .sort((firstSquad, secondSquad) => firstSquad.avgAge > secondSquad.avgAge ? -1 : 1)
+      .slice(0, 5);
     return sortedArr.map((squad) => (
       <div key={`highest_item_${squad.squad.id}`} className='highest-age-item'>
         <span className='team-name'>{squad.squad.name}</span>
@@ -44,7 +46,9 @@ const TopFiveCard = () => {
   }
 
   const displayLowestList = () => {
-    const sortedArr = squadsList.sort((firstSquad, secondSquad) => firstSquad.avgAge > secondSquad.avgAge ? 1 : -1);
+    const sortedArr = squadsList
+      .sort((firstSquad, secondSquad) => firstSquad.avgAge > secondSquad.avgAge ? 1 : -1)
+      .slice(0, 5);
     return sortedArr.map((squad) => (
       <div key={`lowest_item_${squad.squad.id}`} className='lowest-age-item'>
         <span className='team-name'>{squad.squad.name}</span>

@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import { FaPen, FaShareAlt, FaSort, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -7,10 +7,16 @@ import Card from '../../../components/Card/Card';
 import { Squad, StateProps } from '../../../shared/Interfaces';
 import './SquadsTable.css';
 
+interface SortProps {
+  direction: String,
+  fieldToSort: String;
+}
+
 const SquadsTable = () => {
 
   const history = useHistory();
   const squads = useSelector((state: StateProps) => state.squads);
+  const [ sortBy, setSortBy ] = useState<SortProps>({ direction: 'asc', fieldToSort: 'name'});
   const dispatch = useDispatch();
 
   const handleEditClick = (event: MouseEvent, squad: Squad) => {
@@ -27,7 +33,14 @@ const SquadsTable = () => {
 
   const renderSquadsList = () => {
     if (squads.length) {
-      return squads.map((squad) => (
+      const order = sortBy.direction === 'asc' ? -1 : 1;
+      const sortedSquads = squads.sort((firstItem, secondItem) => {
+          const firstFieldToCompare = sortBy.fieldToSort === 'name' ? firstItem.name : firstItem.description;
+          const secondFieldToCompare = sortBy.fieldToSort === 'name' ? secondItem.name : secondItem.description;
+          return firstFieldToCompare.toLocaleLowerCase() < secondFieldToCompare.toLocaleLowerCase() ? order : (order * -1);
+        }
+      )
+      return sortedSquads.map((squad) => (
         <tr key={`${squad.id}`} className='item-row'>
           <td className='name-cell'>{squad.name}</td>
           <td className='description-cell'>
@@ -53,6 +66,11 @@ const SquadsTable = () => {
     return '';
   };
 
+  const onSortClick = (fieldToSort: String) => {
+    const direction = sortBy.direction === 'asc' ? 'dsc' : 'asc';
+    setSortBy({ direction, fieldToSort}) 
+  }
+
   return (
     <Card
       className='squads-card'
@@ -65,10 +83,10 @@ const SquadsTable = () => {
           <tr className='header-row'>
             <th id='name-header-cell' className='table-head'>
               <span>Name</span>
-              <FaSort className='sort-icon' />
+              <FaSort className='sort-icon' onClick={() => onSortClick('name')}/>
               <div className='divider'></div>
             </th>
-            <th id='description-header-cell' className='table-head'>
+            <th id='description-header-cell' onClick={() => onSortClick('description')} className='table-head'>
               <span>Description</span>
               <FaSort className='sort-icon' />
             </th>
