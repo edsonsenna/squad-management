@@ -1,9 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Card from '../../../components/Card/Card';
+import { Squad, StateProps } from '../../../shared/Interfaces';
 import './TopFiveCard.css';
 
+interface SquadsListProps {
+  avgAge: Number,
+  squad: Squad
+}
+
 const TopFiveCard = () => {
+
+  const squads = useSelector((state: StateProps) => state.squads);
+  const [squadsList, setSquadsList] = useState<SquadsListProps[]>([]);
+  
+  useEffect(() => {
+    calculateAvgAge();
+  }, [squads]);
+  
+  useEffect(() => {
+    console.log(squadsList);
+  }, [squadsList]);
+  
+  const calculateAvgAge = () => {
+
+    const filteredSquads:SquadsListProps[] = squads.map(squadInStore => {
+      let totalAge = 0
+      squadInStore.players.map(playerInfo => totalAge += Number(playerInfo.player.age))
+      const avgAge = (totalAge / squadInStore.players.length) || 0;
+      return { avgAge, squad: squadInStore };
+    });
+
+    setSquadsList(filteredSquads);
+
+  }
+
+  const displayHighestList = () => {
+    const sortedArr = squadsList.sort((firstSquad, secondSquad) => firstSquad.avgAge > secondSquad.avgAge ? -1 : 1);
+    return sortedArr.map((squad) => (
+      <div className='highest-age-item'>
+        <span className='team-name'>{squad.squad.name}</span>
+        <span className='highest-age-value'>
+          <b>{squad.avgAge.toFixed(1)}</b>
+        </span>
+      </div>
+    ));
+  }
+
+  const displayLowestList = () => {
+    const sortedArr = squadsList.sort((firstSquad, secondSquad) => firstSquad.avgAge > secondSquad.avgAge ? 1 : -1);
+    return sortedArr.map((squad) => (
+      <div className='lowest-age-item'>
+        <span className='team-name'>{squad.squad.name}</span>
+        <span className='lowest-age-value'>
+          <b>{squad.avgAge.toFixed(1)}</b>
+        </span>
+      </div>
+    ));
+  }
+
   return (
     <Card className='top-five-card' title='Top 5'>
       <div className='top-five-content'>
@@ -12,36 +68,7 @@ const TopFiveCard = () => {
             <b>Highest avg age</b>
           </span>
           <div className='highest-age-list'>
-            <div className='highest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='highest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
-            <div className='highest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='highest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
-            <div className='highest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='highest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
-            <div className='highest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='highest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
-            <div className='highest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='highest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
+            { displayHighestList()}
           </div>
         </div>
         <div className='lowest-age'>
@@ -49,36 +76,7 @@ const TopFiveCard = () => {
             <b>Lowest avg age</b>
           </span>
           <div className='lowest-age-list'>
-            <div className='lowest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='lowest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
-            <div className='lowest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='lowest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
-            <div className='lowest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='lowest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
-            <div className='lowest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='lowest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
-            <div className='lowest-age-item'>
-              <span className='team-name'>Inter Milan</span>
-              <span className='lowest-age-value'>
-                <b>31.9</b>
-              </span>
-            </div>
+            { displayLowestList() }
           </div>
         </div>
       </div>

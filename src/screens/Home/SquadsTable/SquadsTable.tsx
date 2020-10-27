@@ -1,25 +1,17 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { MouseEvent } from 'react';
 import { FaPen, FaShareAlt, FaSort, FaTrash } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Card from '../../../components/Card/Card';
-import { Squad } from '../../../shared/Interfaces';
+import { Squad, StateProps } from '../../../shared/Interfaces';
 import './SquadsTable.css';
 
-interface SquadsTableProps {
-  squadsList: Squad[];
-}
-
-const SquadsTable = ({ squadsList }: SquadsTableProps) => {
+const SquadsTable = () => {
 
   const history = useHistory();
-  const [squads, setSquads] = useState(squadsList);
+  const squads = useSelector((state: StateProps) => state.squads);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setSquads(squadsList);
-  }, [squadsList]);
 
   const handleEditClick = (event: MouseEvent, squad: Squad) => {
     event.preventDefault();
