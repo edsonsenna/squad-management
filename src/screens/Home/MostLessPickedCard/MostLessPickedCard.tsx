@@ -25,7 +25,7 @@ const MostLessPickedCard = () => {
                 squad.players.forEach(playerInfo => {
                     totalChoices++;
                     const findPlayerIndex = pickeds.findIndex((value) =>  value.id === playerInfo.player.player_id);
-                    if(findPlayerIndex > 0) {
+                    if(findPlayerIndex >= 0) {
                         pickeds[findPlayerIndex].count++;
                     } else {
                         pickeds.push({

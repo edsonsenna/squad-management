@@ -47,7 +47,7 @@ const SquadsTable = () => {
             <span>{squad.description}</span>
             <div className='row-actions'>
               <div className="tooltip">
-                <FaTrash fontWeight={200} className='action-icon' onClick={(event) => handleDeleteClick(event, squad)} />
+                <FaTrash fontWeight={200} className='action-icon delete-icon' onClick={(event) => handleDeleteClick(event, squad)} />
                 <span className="tooltiptext">Delete</span>
               </div>
               <div className="tooltip">
@@ -83,7 +83,7 @@ const SquadsTable = () => {
           <tr className='header-row'>
             <th id='name-header-cell' className='table-head'>
               <span>Name</span>
-              <FaSort className='sort-icon' onClick={() => onSortClick('name')}/>
+              <FaSort data-testid="name-sort-icon" className='sort-icon' onClick={() => onSortClick('name')}/>
               <div className='divider'></div>
             </th>
             <th id='description-header-cell' onClick={() => onSortClick('description')} className='table-head'>
@@ -92,7 +92,7 @@ const SquadsTable = () => {
             </th>
           </tr>
         </thead>
-        <tbody>{renderSquadsList()}</tbody>
+        <tbody data-test="squads-list-table">{renderSquadsList()}</tbody>
       </table>
     </Card>
   );

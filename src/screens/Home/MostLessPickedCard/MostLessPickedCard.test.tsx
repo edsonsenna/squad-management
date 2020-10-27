@@ -19,14 +19,14 @@ test("it has to render both most and less picked player", () => {
     );
     expect(getByText("Most picked player")).not.toBeNull();
     const mostPickedPercentage = getByTestId('most-picked-percentage');
-    expect(mostPickedPercentage.textContent).toBe('88%');
+    expect(mostPickedPercentage.textContent).toBe('83%');
     const mostPickedInitials = getByTestId('most-picked-initials');
     expect(mostPickedInitials.textContent).toBe('JJ');
 
     expect(getByText("Less picked player")).not.toBeNull();
     const lessPickedPercentage = getByTestId('less-picked-percentage');
-    expect(lessPickedPercentage.textContent).toBe('13%');
+    expect(lessPickedPercentage.textContent).toBe('17%');
     const lessPickedInitials = getByTestId('less-picked-initials');
     expect(lessPickedInitials.textContent).toBe('CR');
 
-})
+});

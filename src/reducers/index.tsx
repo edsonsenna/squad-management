@@ -57,7 +57,7 @@ const INITIAL_STATE = {
         },
         {
             id: v4(),
-            name: 'PSG',
+            name: 'BPSG',
             description: 'bPSG Squad',
             website: 'https://psg.com',
             type: 'real',
@@ -78,7 +78,7 @@ const INITIAL_STATE = {
         },
         {
             id: v4(),
-            name: 'zPSG',
+            name: 'VPSG',
             description: 'PSG Squad',
             website: 'https://psg.com',
             type: 'real',
@@ -99,50 +99,8 @@ const INITIAL_STATE = {
         },
         {
             id: v4(),
-            name: 'PSG 2',
-            description: 'PSG Squad 2',
-            website: 'https://psg.com',
-            type: 'real',
-            tags: '',
-            formation: '2-4-4',
-            players: [
-                {
-                    player: {
-                        player_id: 123,
-                        player_name: 'Jose Juarez',
-                        age: 27,
-                        nacionality: 'Espanha',
-                    },
-                    row: 1,
-                    column: 1
-                }
-            ]
-        },
-        {
-            id: v4(),
-            name: 'PSG 3',
-            description: 'PSG Squad 3',
-            website: 'https://psg.com',
-            type: 'real',
-            tags: '',
-            formation: '2-4-4',
-            players: [
-                {
-                    player: {
-                        player_id: 123,
-                        player_name: 'Jose Juarez',
-                        age: 27,
-                        nacionality: 'Espanha',
-                    },
-                    row: 1,
-                    column: 1
-                }
-            ]
-        },
-        {
-            id: v4(),
-            name: 'PSG 4',
-            description: 'PSG Squad 4',
+            name: 'APSG',
+            description: 'PSG Squad',
             website: 'https://psg.com',
             type: 'real',
             tags: '',
