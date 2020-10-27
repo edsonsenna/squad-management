@@ -108,7 +108,7 @@ tr > th {
   border-radius: 6px;
   padding: 5px 0;
   position: absolute;
-  z-index: 1;
+  z-index: 999;
   bottom: 125%;
   left: 50%;
   margin-left: -60px;
@@ -133,7 +133,7 @@ tr > th {
 }
 
 .name-cell,
-.description-cell {
+.description-cell > span {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

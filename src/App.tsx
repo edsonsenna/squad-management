@@ -8,7 +8,7 @@ import {
 import { Provider } from 'react-redux';
 
 import './App.css';
-import Scaffold from './components/Scaffold/Scaffold';
+import Scaffold from './components/ScaffoldComponent/Scaffold';
 import Create from './screens/Create/Create';
 import Home from './screens/Home/Home';
 import store from './store';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/dom';
 import { render } from '@testing-library/react';
 
 import SquadsTable from './SquadsTable';
@@ -41,8 +40,6 @@ test("it has to change table sort to dsc", () => {
     const onSortClick = jest.fn();
     const nameSortIcon = getByTestId('name-sort-icon');
     expect(nameSortIcon).not.toBeNull();
-    fireEvent.click(nameSortIcon);
-
     // expect(onSortClick).toHaveBeenCalled();
     // const squadsListTable = getByTestId('squads-list-table');
     // const firstRow = squadsListTable.firstChildren;

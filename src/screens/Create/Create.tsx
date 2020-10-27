@@ -394,7 +394,7 @@ const Create = () => {
                 name='tags'
                 ref={register}
                 className='tags-input'
-              ><div className="chip-tag">Tag 1 <span>X</span></div></textarea>
+              ></textarea>
             </div>
           </div>
         </div>
