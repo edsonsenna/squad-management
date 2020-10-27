@@ -217,13 +217,19 @@ const Create = () => {
     ev.dataTransfer.setData('player', JSON.stringify(player));
   };
 
+  const isPlayerSelected = (player: PlayerProps) => {
+    const playerIndex = teamFormationPlayers.findIndex(playerInfo => playerInfo.player.player_id === player.player_id);
+    return playerIndex >= 0;
+  }
+
   const displayPlayersList = () => {
     if (players?.length) {
       return players.map((player: PlayerProps) => (
         <div
           key={`${player.player_id}`}
           className='search-results-item'
-          draggable='true'
+          style={{ cursor: isPlayerSelected(player) ? 'not-allowed' : 'pointer', color: isPlayerSelected(player) ? 'grey' : 'inherit'}}
+          draggable={ isPlayerSelected(player) ? 'false' : 'true'}
           onDragStart={(event) => onDragStart(event, player)}
         >
           <div className='first-item-row'>
@@ -437,135 +443,6 @@ const Create = () => {
                       </div>
                     </div>
                   </div>
-                  {/* <div className='squad-spots-row'>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 1, 1)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 1, 2)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 1, 3)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 1, 4)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='squad-spots-row'>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 2, 1)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 2, 2)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 2, 3)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 2, 4)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='squad-spots-row'>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 3, 1)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 3, 2)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 3, 3)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 3, 4)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='squad-spots-row'>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 4, 1)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 4, 2)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 4, 3)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 4, 4)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='squad-spots-row'>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 5, 1)} onDragOver={onDragOver}>
-                      <div className='spot-border'>
-                        <div className='spot-text'>
-                          <span>+</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
                 </div>
               </div>
             </div>
