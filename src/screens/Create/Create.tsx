@@ -12,11 +12,17 @@ const API_URL = 'https://api-football-v1.p.rapidapi.com/v2/players/search/';
 
 const defaultValues = {
   type: 'real',
-  formation: '3-2-2-3'
+  formation: '3-2-2-3',
 };
 
 interface CreateProps {
   squad?: Squad;
+}
+
+interface TeamFormationProps {
+  row: Number;
+  column: Number;
+  player: PlayerProps;
 }
 
 const Create = ({ squad }: CreateProps) => {
@@ -25,12 +31,19 @@ const Create = ({ squad }: CreateProps) => {
 
   const [debounceTime, setDebounceTime] = useState(setTimeout(() => {}, 300));
   const [players, setPlayers] = useState<PlayerProps[]>([]);
+  const [teamFormationPlayers, setTeamFormationPlayers] = useState<
+    TeamFormationProps[]
+  >([]);
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     console.log('Receiving Squad', squad);
   }, [squad]);
+
+  useEffect(() => {
+    console.log(teamFormationPlayers);
+  }, [teamFormationPlayers])
 
   const onSubmit = (data: Object) => {
     console.log('Handle Submit!!', data);
@@ -113,23 +126,23 @@ const Create = ({ squad }: CreateProps) => {
           ];
 
           setPlayers(mockedResult);
-        //   axios
-        //     .get(`${API_URL}${name}`, {
-        //       headers: {
-        //         'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
-        //         'x-rapidapi-key':
-        //           '4bca5775a1msh257b6f1f625f7d4p1449eajsnc70830939a6f',
-        //       },
-        //     })
-        //     .then((results) => {
-        //       console.log('[FetchingData]', results);
-        //       console.log(
-        //         '[Players]',
-        //         JSON.stringify(results.data.api.players)
-        //       );
-        //       setPlayers(results.data.api.players);
-        //     })
-        //     .catch((err) => console.error);
+          //   axios
+          //     .get(`${API_URL}${name}`, {
+          //       headers: {
+          //         'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
+          //         'x-rapidapi-key':
+          //           '4bca5775a1msh257b6f1f625f7d4p1449eajsnc70830939a6f',
+          //       },
+          //     })
+          //     .then((results) => {
+          //       console.log('[FetchingData]', results);
+          //       console.log(
+          //         '[Players]',
+          //         JSON.stringify(results.data.api.players)
+          //       );
+          //       setPlayers(results.data.api.players);
+          //     })
+          //     .catch((err) => console.error);
         }, 300)
       );
     }
@@ -137,19 +150,40 @@ const Create = ({ squad }: CreateProps) => {
 
   const onDrop = (ev: DragEvent, row: Number, column: Number) => {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData('player');
-    console.log('[DroppedOn]', row, column);
-    console.log(data);
+    var player = JSON.parse(ev.dataTransfer.getData('player'));
+    const filteredPlayer = teamFormationPlayers.filter(
+      (position: TeamFormationProps) => {
+        return (
+          position.row !== row ||
+          (position.column !== column && position.row === row)
+        );
+      }
+    );
+    filteredPlayer.push({ row, column, player });
+    setTeamFormationPlayers(filteredPlayer);
     // ev?.currentTarget?.appendChild(document.getElementById(data));
-  }
+  };
+
+  const searchPlayerInPosition = (row: Number, column: Number) => {
+    const playerPosition = teamFormationPlayers.find(
+      (position) => position.row === row && position.column === column
+    );
+    if (playerPosition) {
+      const splittedName = playerPosition.player.player_name.split(/\s/g);
+      console.log(splittedName);
+      const initials = `${splittedName[0] ? splittedName[0][0] : ''}${splittedName[1] ? splittedName[1][0] : ''}`;
+      return initials;
+    }
+    return '+';
+  };
 
   const onDragOver = (ev: DragEvent) => {
-      ev.preventDefault();
-  }
+    ev.preventDefault();
+  };
 
   const onDragStart = (ev: DragEvent, player: PlayerProps) => {
-      ev.dataTransfer.setData('player', JSON.stringify(player));
-  }
+    ev.dataTransfer.setData('player', JSON.stringify(player));
+  };
 
   const displayPlayersList = () => {
     if (players?.length) {
@@ -187,41 +221,42 @@ const Create = ({ squad }: CreateProps) => {
   };
 
   const displayColumn = (row: Number, column: Number) => {
-      return (
-        <div key={`row_${row}_col_${column}`} className='spots-col' onDrop={(event) => onDrop(event, row, column)} onDragOver={onDragOver}>
-            <div className='spot-border'>
-            <div className='spot-text'>
-                <span>+</span>
-            </div>
-            </div>
+    return (
+      <div
+        key={`row_${row}_col_${column}`}
+        className='spots-col'
+        onDrop={(event) => onDrop(event, row, column)}
+        onDragOver={onDragOver}
+      >
+        <div className='spot-border'>
+          <div className='spot-text'>
+            <span>{searchPlayerInPosition(row, column)}</span>
+          </div>
         </div>
-      )
-  } 
-
+      </div>
+    );
+  };
 
   const displaySpots = () => {
-      
     let formationStringArr = `${teamFormation}`.split('-');
-    if(formationStringArr?.length) {
-        let formationArr = formationStringArr.map(numberString => Number(numberString));
-        return formationArr.map((number, rowIndex) => {
-            let columns = [];
-            for(let spotIndex = 1; spotIndex <= number; spotIndex++) {
-                columns.push(spotIndex)
-            }
-            return (
-                <div key={`row_${(rowIndex + 1)}`} className='squad-spots-row'>
-                {
-                    columns.map(column => (
-                        displayColumn((rowIndex + 1), column)
-                    ))
-                }
-                </div>
-            )
-        })           
+    if (formationStringArr?.length) {
+      let formationArr = formationStringArr.map((numberString) =>
+        Number(numberString)
+      );
+      return formationArr.map((number, rowIndex) => {
+        let columns = [];
+        for (let spotIndex = 1; spotIndex <= number; spotIndex++) {
+          columns.push(spotIndex);
+        }
+        return (
+          <div key={`row_${rowIndex + 1}`} className='squad-spots-row'>
+            {columns.map((column) => displayColumn(rowIndex + 1, column))}
+          </div>
+        );
+      });
     }
     return '';
-  }
+  };
 
   return (
     <Card title='Create your team'>
@@ -323,6 +358,8 @@ const Create = ({ squad }: CreateProps) => {
         <div className='squad-config-title'>
           <b>CONFIGURE SQUAD</b>
         </div>
+
+        {/* <div>{ JSON.stringify(teamFormationPlayers)}</div> */}
         <div className='squad-config-row'>
           <div className='first-column'>
             <div className='squad-formation'>
@@ -346,12 +383,16 @@ const Create = ({ squad }: CreateProps) => {
                 <div className='squad-middle-circle'></div>
                 <div className='squad-middle'></div>
                 <div className='squad-spots'>
-                  { displaySpots()}
+                  {displaySpots()}
                   <div className='squad-spots-row'>
-                    <div className='spots-col' onDrop={(event) => onDrop(event, 5, 1)} onDragOver={onDragOver}>
+                    <div
+                      className='spots-col'
+                      onDrop={(event) => onDrop(event, 5, 1)}
+                      onDragOver={onDragOver}
+                    >
                       <div className='spot-border'>
                         <div className='spot-text'>
-                          <span>+</span>
+                        <span>{searchPlayerInPosition(5, 1)}</span>
                         </div>
                       </div>
                     </div>
