@@ -17,15 +17,15 @@ export interface StateProps {
 export interface PlayerProps {
   player_id: Number;
   player_name: String;
-  firstname?: String;
-  lastname?: String;
-  number?: String;
-  position?: String;
+  firstname?: String | null;
+  lastname?: String | null;
+  number?: String | null;
+  position?: String | null;
   age: Number;
-  birth_date?: String;
-  birth_place?: String;
-  birth_country?: String;
-  nationality?: String;
-  height?: String;
-  weight?: String;
+  birth_date?: String | null;
+  birth_place?: String | null;
+  birth_country?: String | null;
+  nationality?: String | null;
+  height?: String | null;
+  weight?: String | null;
 }

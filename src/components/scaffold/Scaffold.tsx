@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/img/logo.png';
 
 import './Scaffold.css';
@@ -12,8 +13,10 @@ const Scaffold = (props: ScaffoldProps) => {
         <div className="root">
             <header>
                 <div className="company-info">
-                    <img className="company-logo" src={Logo} alt="Company Logo"></img>
-                    <span className="company-name">Squad Management Tool</span>
+                    <Link to="/">
+                        <img className="company-logo" src={Logo} alt="Company Logo"></img>
+                        <span className="company-name">Squad Management Tool</span>
+                    </Link>
                 </div>
                 <div className="user-info">
                     <span>John Doe</span>

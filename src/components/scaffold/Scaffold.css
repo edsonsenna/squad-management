@@ -23,6 +23,18 @@
     width: calc(50% - 40px);
 }
 
+.company-info > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+}
+
+.company-info > a:hover {
+    cursor: pointer;
+}
+
 .user-info {
     justify-content: flex-end;
 }

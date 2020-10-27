@@ -1,298 +1,519 @@
-import React, { KeyboardEvent, useState } from 'react';
+import React, { DragEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Card from '../../components/Card/Card';
 import './Create.css';
-import { PlayerProps } from '../../shared/Interfaces';
+import { PlayerProps, Squad } from '../../shared/Interfaces';
 
 const API_URL = 'https://api-football-v1.p.rapidapi.com/v2/players/search/';
 
 const defaultValues = {
-    type: "real"
+  type: 'real',
+  formation: '3-2-2-3'
+};
+
+interface CreateProps {
+  squad?: Squad;
 }
 
-const Create = () => {
+const Create = ({ squad }: CreateProps) => {
+  const { register, handleSubmit, watch } = useForm({ defaultValues });
+  const teamFormation = watch('formation');
 
-    const { register, handleSubmit } = useForm({ defaultValues });
+  const [debounceTime, setDebounceTime] = useState(setTimeout(() => {}, 300));
+  const [players, setPlayers] = useState<PlayerProps[]>([]);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    const [debounceTime, setDebounceTime] = useState(setTimeout(() => {}, 300));
-    const [players, setPlayers] = useState([]);
+  useEffect(() => {
+    console.log('Receiving Squad', squad);
+  }, [squad]);
 
-    const onSubmit = (data: Object) => {
-        console.log('Handle Submit!!', data);
+  const onSubmit = (data: Object) => {
+    console.log('Handle Submit!!', data);
+    dispatch({ type: 'ADD_SQUAD', squad: data });
+    history.push('/');
+  };
+
+  const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (debounceTime) {
+      clearTimeout(debounceTime);
+      setDebounceTime(setTimeout(() => {}, 300));
     }
 
-    const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
+    const name = event?.currentTarget?.value;
 
-        if(debounceTime) {
-            clearTimeout(debounceTime);
-            setDebounceTime(setTimeout(() => {}, 300));
-        }
+    if (name) {
+      setDebounceTime(
+        setTimeout(() => {
+          const mockedResult = [
+            {
+              player_id: 111183,
+              player_name: 'Gal Neymark',
+              firstname: 'Gal',
+              lastname: 'Neymark',
+              number: null,
+              position: 'Midfielder',
+              age: 20,
+              birth_date: '10/09/1997',
+              birth_place: null,
+              birth_country: 'Israel',
+              nationality: 'Israel',
+              height: null,
+              weight: null,
+            },
+            {
+              player_id: 252852,
+              player_name: 'Neymar José Preciado Quintero',
+              firstname: 'Neymar José',
+              lastname: 'Preciado Quintero',
+              number: null,
+              position: 'Attacker',
+              age: 18,
+              birth_date: '15/11/1998',
+              birth_place: 'San Lorenzo',
+              birth_country: 'Ecuador',
+              nationality: 'Ecuador',
+              height: null,
+              weight: null,
+            },
+            {
+              player_id: 276,
+              player_name: 'Neymar',
+              firstname: 'Neymar',
+              lastname: 'da Silva Santos Júnior',
+              number: null,
+              position: 'Attacker',
+              age: 28,
+              birth_date: '05/02/1992',
+              birth_place: 'Mogi das Cruzes',
+              birth_country: 'Brazil',
+              nationality: 'Brazil',
+              height: '175 cm',
+              weight: '68 kg',
+            },
+            {
+              player_id: 95071,
+              player_name: 'Martin Neymar Jimenez Bedoya',
+              firstname: 'Martin Neymar',
+              lastname: 'Jimenez Bedoya',
+              number: null,
+              position: 'Defender',
+              age: 25,
+              birth_date: '17/03/1995',
+              birth_place: null,
+              birth_country: 'Panama',
+              nationality: 'Panama',
+              height: null,
+              weight: null,
+            },
+          ];
 
-        const name = event?.currentTarget?.value;
-
-        if(name) {
-            
-            setDebounceTime(setTimeout(() => {
-                axios.get(`${API_URL}${name}`, { headers: {
-                    'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
-                    'x-rapidapi-key': '4bca5775a1msh257b6f1f625f7d4p1449eajsnc70830939a6f'
-                }})
-                .then((results) => { 
-                    console.log('[FetchingData]', results)
-                    setPlayers(results.data.api.players);
-                })
-                .catch((err) => console.error);
-            }, 300));
-        }
-        
-        
+          setPlayers(mockedResult);
+        //   axios
+        //     .get(`${API_URL}${name}`, {
+        //       headers: {
+        //         'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
+        //         'x-rapidapi-key':
+        //           '4bca5775a1msh257b6f1f625f7d4p1449eajsnc70830939a6f',
+        //       },
+        //     })
+        //     .then((results) => {
+        //       console.log('[FetchingData]', results);
+        //       console.log(
+        //         '[Players]',
+        //         JSON.stringify(results.data.api.players)
+        //       );
+        //       setPlayers(results.data.api.players);
+        //     })
+        //     .catch((err) => console.error);
+        }, 300)
+      );
     }
+  };
 
-    const displayPlayersList = () => {
+  const onDrop = (ev: DragEvent, row: Number, column: Number) => {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData('player');
+    console.log('[DroppedOn]', row, column);
+    console.log(data);
+    // ev?.currentTarget?.appendChild(document.getElementById(data));
+  }
 
-        if(players?.length) {
-            return (players.map((player: PlayerProps) => (
-                <div key={`${player.player_id}`} className="search-results-item" draggable="true">
-                    <div className="first-item-row">
-                        <div>
-                            <span className="name-label"><b>Name:</b></span>&nbsp;<span className="name-value">{player.player_name}</span>
-                        </div>
-                        <div>
-                            <span className="age-label"><b>Age:</b></span>&nbsp;<span className="age-value">{player.age}</span>
-                        </div>
-                    </div>
-                    <div className="second-item-row">
-                        <span className="nationality-label"><b>Nationality:</b></span>&nbsp;<span className="nationatily-value">{player.nationality}</span>
-                    </div>
+  const onDragOver = (ev: DragEvent) => {
+      ev.preventDefault();
+  }
+
+  const onDragStart = (ev: DragEvent, player: PlayerProps) => {
+      ev.dataTransfer.setData('player', JSON.stringify(player));
+  }
+
+  const displayPlayersList = () => {
+    if (players?.length) {
+      return players.map((player: PlayerProps) => (
+        <div
+          key={`${player.player_id}`}
+          className='search-results-item'
+          draggable='true'
+          onDragStart={(event) => onDragStart(event, player)}
+        >
+          <div className='first-item-row'>
+            <div>
+              <span className='name-label'>
+                <b>Name:</b>
+              </span>
+              &nbsp;<span className='name-value'>{player.player_name}</span>
+            </div>
+            <div>
+              <span className='age-label'>
+                <b>Age:</b>
+              </span>
+              &nbsp;<span className='age-value'>{player.age}</span>
+            </div>
+          </div>
+          <div className='second-item-row'>
+            <span className='nationality-label'>
+              <b>Nationality:</b>
+            </span>
+            &nbsp;
+            <span className='nationatily-value'>{player.nationality}</span>
+          </div>
+        </div>
+      ));
+    }
+  };
+
+  const displayColumn = (row: Number, column: Number) => {
+      return (
+        <div key={`row_${row}_col_${column}`} className='spots-col' onDrop={(event) => onDrop(event, row, column)} onDragOver={onDragOver}>
+            <div className='spot-border'>
+            <div className='spot-text'>
+                <span>+</span>
+            </div>
+            </div>
+        </div>
+      )
+  } 
+
+
+  const displaySpots = () => {
+      
+    let formationStringArr = `${teamFormation}`.split('-');
+    if(formationStringArr?.length) {
+        let formationArr = formationStringArr.map(numberString => Number(numberString));
+        return formationArr.map((number, rowIndex) => {
+            let columns = [];
+            for(let spotIndex = 1; spotIndex <= number; spotIndex++) {
+                columns.push(spotIndex)
+            }
+            return (
+                <div key={`row_${(rowIndex + 1)}`} className='squad-spots-row'>
+                {
+                    columns.map(column => (
+                        displayColumn((rowIndex + 1), column)
+                    ))
+                }
                 </div>
-            )))
-        }
+            )
+        })           
     }
+    return '';
+  }
 
-    return (
-        <Card title="Create your team">
-            <form onSubmit={handleSubmit(onSubmit)}>
+  return (
+    <Card title='Create your team'>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='team-info-title'>
+          <b>TEAM INFORMATION</b>
+        </div>
+        <div className='team-info-row'>
+          <div className='first-column'>
+            <div className='input-field'>
+              <label htmlFor='name'>
+                <b>Team Name</b>
+              </label>
+              <input
+                id='name'
+                name='name'
+                ref={register}
+                type='text'
+                placeholder='Insert team name'
+                className='team-name-input'
+              />
+            </div>
 
-                <div className="team-info-title">
-                    <b>TEAM INFORMATION</b>
-                </div>
-                <div className="team-info-row">
-                    <div className="first-column">
-                        <div className="input-field">
-                            <label htmlFor="name"><b>Team Name</b></label>
-                            <input id="name" name="name" ref={register} type="text" placeholder="Insert team name" className="team-name-input"/>
-                        </div>
+            <div className='editable-field'>
+              <div className='editable-label'>
+                <b>Description</b>
+              </div>
+              <textarea
+                id='description'
+                name='description'
+                ref={register}
+                className='description-input'
+              ></textarea>
+            </div>
+          </div>
 
-                        <div className="editable-field">
-                            <div className="editable-label"><b>Description</b></div>
-                            <textarea id="description" name="description" ref={register} className="description-input"></textarea>
-                        </div>
-                    </div>
+          <div className='second-column'>
+            <div className='input-field'>
+              <label htmlFor='website'>
+                <b>Team Website</b>
+              </label>
+              <input
+                id='website'
+                name='website'
+                ref={register}
+                type='text'
+                placeholder='http://myteam.com'
+                className='team-website-input'
+              />
+            </div>
 
-                    <div className="second-column">
+            <div className='radio-group-wrapper'>
+              <div className='team-type-label'>
+                <b>Team Type</b>
+              </div>
+              <div className='radio-group'>
+                <input
+                  type='radio'
+                  name='type'
+                  id='real'
+                  ref={register}
+                  value='real'
+                />
+                <label className='type-label real-option-label' htmlFor='real'>
+                  Real
+                </label>
+                <input
+                  type='radio'
+                  name='type'
+                  id='fantasy'
+                  ref={register}
+                  value='fantasy'
+                />
+                <label
+                  className='type-label fantasy-option-label'
+                  htmlFor='fantasy'
+                >
+                  Fantasy
+                </label>
+              </div>
+            </div>
 
-                        <div className="input-field">
-                            <label htmlFor="website"><b>Team Website</b></label>
-                            <input id="website" name="website" ref={register} type="text" placeholder="http://myteam.com" className="team-website-input"/>
-                        </div>
-
-                        <div className="radio-group-wrapper">
-                            <div className="team-type-label"><b>Team Type</b></div>
-                            <div className="radio-group">
-                                <input type="radio" name="type" id="real" ref={register} value="real"/>
-                                <label className="type-label real-option-label" htmlFor="real">Real</label>
-                                <input type="radio" name="type" id="fantasy" ref={register} value="fantasy"/>
-                                <label className="type-label fantasy-option-label" htmlFor="fantasy">Fantasy</label>
-                            </div>
-                        </div>
-
-                        <div className="editable-field">
-                            <div className="editable-label"><b>Tags</b></div>
-                            {/* <div contentEditable="true" className="tags-input">
+            <div className='editable-field'>
+              <div className='editable-label'>
+                <b>Tags</b>
+              </div>
+              {/* <div contentEditable="true" className="tags-input">
                                 <span>Test</span>Tags
                             </div> */}
-                            <textarea id="tags" name="tags" ref={register} className="tags-input"></textarea>
+              <textarea
+                id='tags'
+                name='tags'
+                ref={register}
+                className='tags-input'
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div className='squad-config-title'>
+          <b>CONFIGURE SQUAD</b>
+        </div>
+        <div className='squad-config-row'>
+          <div className='first-column'>
+            <div className='squad-formation'>
+              <label htmlFor='formation'>
+                <b>Formation</b>
+              </label>
+              <select name='formation' id='formation' ref={register}>
+                <option value='3-2-2-3'>3 - 2 - 2 - 3</option>
+                <option value='1-3-2-3'>3 - 2 - 3 - 1</option>
+                <option value='3-4-3'>3 - 4 - 3</option>
+                <option value='2-2-3-3'>3 - 5 - 2</option>
+                <option value='1-3-2-4'>4 - 2 - 3 - 1</option>
+                <option value='1-1-3-4'>4 - 3 - 1 - 1</option>
+                <option value='2-3-4'>4 - 3 - 2</option>
+                <option value='2-4-4'>4 - 4 - 2</option>
+                <option value='1-2-3-4'>4 - 5 - 1</option>
+                <option value='2-3-1-4'>5 - 4 - 1</option>
+              </select>
+
+              <div className='squad-formation-field'>
+                <div className='squad-middle-circle'></div>
+                <div className='squad-middle'></div>
+                <div className='squad-spots'>
+                  { displaySpots()}
+                  <div className='squad-spots-row'>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 5, 1)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
                         </div>
+                      </div>
                     </div>
+                  </div>
+                  {/* <div className='squad-spots-row'>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 1, 1)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 1, 2)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 1, 3)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 1, 4)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='squad-spots-row'>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 2, 1)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 2, 2)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 2, 3)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 2, 4)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='squad-spots-row'>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 3, 1)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 3, 2)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 3, 3)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 3, 4)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='squad-spots-row'>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 4, 1)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 4, 2)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 4, 3)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 4, 4)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='squad-spots-row'>
+                    <div className='spots-col' onDrop={(event) => onDrop(event, 5, 1)} onDragOver={onDragOver}>
+                      <div className='spot-border'>
+                        <div className='spot-text'>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div> */}
                 </div>
-                <div className="squad-config-title"><b>CONFIGURE SQUAD</b></div>
-                <div className="squad-config-row">
-                    <div className="first-column">
-                        <div className="squad-formation">
-                            <label htmlFor="team-formation"><b>Formation</b></label>
-                            <select name="team-formation" id="team-formation">
-                                <option value="">3 - 2 - 2 - 3</option>
-                                <option value="">3 - 2 - 3 - 1</option>
-                                <option value="">3 - 4 - 3</option>
-                                <option value="">3 - 5 - 2</option>
-                                <option value="">4 - 2 - 3 - 1</option>
-                                <option value="">4 - 3 - 1 - 1</option>
-                                <option value="">4 - 3 - 2</option>
-                                <option value="">4 - 4 - 2</option>
-                                <option value="">4 - 5 - 1</option>
-                                <option value="">5 - 4 -1</option>
-                            </select>
+              </div>
+            </div>
+          </div>
 
-                            <div className="squad-formation-field">
-                                <div className="squad-middle-circle"></div>
-                                <div className="squad-middle"></div>
-                                <div className="squad-spots">
-                                    <div className="squad-spots-row">
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="squad-spots-row">
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="squad-spots-row">
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="squad-spots-row">
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="squad-spots-row">
-                                        <div className="spots-col">
-                                            <div className="spot-border">
-                                                <div className="spot-text">
-                                                    <span>+</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="second-column">
-                        <div className="input-field">
-                            <label htmlFor="search-name"><b>Search Players</b></label>
-                            <input id="search-name" type="text" placeholder="Player name" className="search-name-input" onKeyUp={handleSearch}/>
-                        </div>
-                        <div className="search-results">
-                            { displayPlayersList() }
-                        </div>
-                    </div>
-                </div>
-                <div className="actions-row">
-                    <button type="submit" className="submit-button">
-                        <b>Save</b>
-                    </button> 
-                </div> 
-            </form>
-        </Card>
-    )
-}
+          <div className='second-column'>
+            <div className='input-field'>
+              <label htmlFor='search-name'>
+                <b>Search Players</b>
+              </label>
+              <input
+                id='search-name'
+                type='text'
+                placeholder='Player name'
+                className='search-name-input'
+                onKeyUp={handleSearch}
+              />
+            </div>
+            <div className='search-results'>{displayPlayersList()}</div>
+          </div>
+        </div>
+        <div className='actions-row'>
+          <button type='submit' className='submit-button'>
+            <b>Save</b>
+          </button>
+        </div>
+      </form>
+    </Card>
+  );
+};
 
 export default Create;
