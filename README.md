@@ -31,6 +31,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ## Important
 
-These project use a external API to search for footbal player by name. The authentication key required by
+This project use a external API to search for footbal player by name. The authentication key required by
 this API will be available just until this project was reviewed. If you cloned this project and the search
 method in create page is faling you must provide a new authentication key or a new API.
