@@ -389,15 +389,12 @@ const Create = () => {
               <div className='editable-label'>
                 <b>Tags</b>
               </div>
-              {/* <div contentEditable="true" className="tags-input">
-                                <span>Test</span>Tags
-                            </div> */}
               <textarea
                 id='tags'
                 name='tags'
                 ref={register}
                 className='tags-input'
-              ></textarea>
+              ><div className="chip-tag">Tag 1 <span>X</span></div></textarea>
             </div>
           </div>
         </div>
