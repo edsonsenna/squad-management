@@ -21,7 +21,7 @@
 
 .squads-column,
 .top-five-column {
-    width: 650px;
+    width: 600px;
 }
 
 @media screen and (max-width: 768px) {
