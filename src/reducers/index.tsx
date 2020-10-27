@@ -54,6 +54,8 @@ const squads = (state: StateProps = INITIAL_STATE, action: ActionProps) => {
             return { ...state, squads: [...state.squads, action.squad]};
         case 'UPDATE_SQUAD':
             return { ...state, squads: [...state.squads.filter(squad => squad.id !== action.squad.id), action.squad]};
+        case 'DELETE_SQUAD':
+            return { ...state, squads: [...state.squads.filter(squad => squad.id !== action.squad.id)]};
         default:
             return state;
     }

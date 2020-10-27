@@ -1,5 +1,6 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
 import { FaPen, FaShareAlt, FaSort, FaTrash } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Card from '../../../components/Card/Card';
@@ -14,6 +15,7 @@ const SquadsTable = ({ squadsList }: SquadsTableProps) => {
 
   const history = useHistory();
   const [squads, setSquads] = useState(squadsList);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setSquads(squadsList);
@@ -22,6 +24,13 @@ const SquadsTable = ({ squadsList }: SquadsTableProps) => {
   const handleEditClick = (event: MouseEvent, squad: Squad) => {
     event.preventDefault();
     history.push('/create', { squad })
+  }
+
+  const handleDeleteClick = (event: MouseEvent, squad: Squad) => {
+    event.preventDefault();
+    if(window.confirm('Are you about deleting this squad?')) {
+      dispatch({ type: 'DELETE_SQUAD', squad });
+    }
   }
 
   const renderSquadsList = () => {
@@ -33,7 +42,7 @@ const SquadsTable = ({ squadsList }: SquadsTableProps) => {
             <span>{squad.description}</span>
             <div className='row-actions'>
               <div className="tooltip">
-                <FaTrash fontWeight={200} className='action-icon' />
+                <FaTrash fontWeight={200} className='action-icon' onClick={(event) => handleDeleteClick(event, squad)} />
                 <span className="tooltiptext">Delete</span>
               </div>
               <div className="tooltip">
