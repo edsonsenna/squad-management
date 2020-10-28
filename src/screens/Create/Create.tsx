@@ -1,6 +1,6 @@
 import React, { DragEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-// import axios from 'axios';
+import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { v4 } from 'uuid';
@@ -10,7 +10,7 @@ import Card from '../../components/Card/Card';
 import './Create.css';
 import { PlayerProps, Squad, SquadPlayerProps } from '../../shared/Interfaces';
 
-// const API_URL = 'https://api-football-v1.p.rapidapi.com/v2/players/search/';
+const API_URL = 'https://api-football-v1.p.rapidapi.com/v2/players/search/';
 
 const defaultValues = {
   id: '',
@@ -102,82 +102,18 @@ const Create = () => {
     if (name) {
       setDebounceTime(
         setTimeout(() => {
-          const mockedResult = [
-            {
-              player_id: 111183,
-              player_name: 'Gal Neymark',
-              firstname: 'Gal',
-              lastname: 'Neymark',
-              number: null,
-              position: 'Midfielder',
-              age: 20,
-              birth_date: '10/09/1997',
-              birth_place: null,
-              birth_country: 'Israel',
-              nationality: 'Israel',
-              height: null,
-              weight: null,
-            },
-            {
-              player_id: 252852,
-              player_name: 'Neymar José Preciado Quintero',
-              firstname: 'Neymar José',
-              lastname: 'Preciado Quintero',
-              number: null,
-              position: 'Attacker',
-              age: 18,
-              birth_date: '15/11/1998',
-              birth_place: 'San Lorenzo',
-              birth_country: 'Ecuador',
-              nationality: 'Ecuador',
-              height: null,
-              weight: null,
-            },
-            {
-              player_id: 276,
-              player_name: 'Neymar',
-              firstname: 'Neymar',
-              lastname: 'da Silva Santos Júnior',
-              number: null,
-              position: 'Attacker',
-              age: 28,
-              birth_date: '05/02/1992',
-              birth_place: 'Mogi das Cruzes',
-              birth_country: 'Brazil',
-              nationality: 'Brazil',
-              height: '175 cm',
-              weight: '68 kg',
-            },
-            {
-              player_id: 95071,
-              player_name: 'Martin Neymar Jimenez Bedoya',
-              firstname: 'Martin Neymar',
-              lastname: 'Jimenez Bedoya',
-              number: null,
-              position: 'Defender',
-              age: 25,
-              birth_date: '17/03/1995',
-              birth_place: null,
-              birth_country: 'Panama',
-              nationality: 'Panama',
-              height: null,
-              weight: null,
-            },
-          ];
-
-          setPlayers(mockedResult);
-          //   axios
-          //     .get(`${API_URL}${name}`, {
-          //       headers: {
-          //         'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
-          //         'x-rapidapi-key':
-          //           '4bca5775a1msh257b6f1f625f7d4p1449eajsnc70830939a6f',
-          //       },
-          //     })
-          //     .then((results) => {
-          //       setPlayers(results.data.api.players);
-          //     })
-          //     .catch((err) => console.error);
+            axios
+              .get(`${API_URL}${name}`, {
+                headers: {
+                  'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
+                  'x-rapidapi-key':
+                    '4bca5775a1msh257b6f1f625f7d4p1449eajsnc70830939a6f',
+                },
+              })
+              .then((results) => {
+                setPlayers(results.data.api.players);
+              })
+              .catch((err) => console.error);
         }, 300)
       );
     }
@@ -199,6 +135,16 @@ const Create = () => {
   };
 
   const searchPlayerInPosition = (row: Number, column: Number) => {
+    const playerPosition = teamFormationPlayers.find(
+      (position) => position.row === row && position.column === column
+    );
+    if (playerPosition?.player) {
+      return playerPosition?.player;
+    }
+    return null;
+  };
+
+  const searchPlayerInitialsInPosition = (row: Number, column: Number) => {
     const playerPosition = teamFormationPlayers.find(
       (position) => position.row === row && position.column === column
     );
@@ -269,9 +215,14 @@ const Create = () => {
       >
         <div className='spot-border'>
           <div className='spot-text'>
-            <span>{searchPlayerInPosition(row, column)}</span>
+            <span>{searchPlayerInitialsInPosition(row, column)}</span>
           </div>
         </div>
+        {
+          searchPlayerInPosition(row, column) && 
+            <span className="tooltiptext">{searchPlayerInPosition(row, column)?.player_name}</span>
+        }
+        
       </div>
     );
   };

@@ -7,32 +7,32 @@ select {
 }
 
 .input-field {
-    display:flex;
-    flex-direction: column;
-    margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
 }
 
 .input-field > label {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .description-input,
 .tags-input {
-    border: 1px solid #dadada;
-    border-radius: 5px;
-    padding: 10px;
-    height: 100px;
-    font-family: inherit;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  padding: 10px;
+  height: 100px;
+  font-family: inherit;
 }
 
 .editable-field > .editable-label {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .team-info-title,
@@ -47,211 +47,259 @@ select {
 
 .team-info-row,
 .squad-config-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 950px;
-    margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 950px;
+  margin-bottom: 50px;
 }
 
 .first-column,
 .second-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 400px;
 }
 
 .radio-group-wrapper {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .team-type-label {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .type-label {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .real-option-label {
-    margin-right: 50px;
+  margin-right: 50px;
 }
 
 .description-input {
-    height: 203px;
-    width: 100%;
-    resize: none;
+  height: 203px;
+  width: 100%;
+  resize: none;
 }
 
 .tags-input {
-    height: 135px;
-    width: 100%;
-    resize: none;
+  height: 135px;
+  width: 100%;
+  resize: none;
 }
 
 .squad-formation > label {
-    margin-right: 25px;
+  margin-right: 25px;
 }
 
 .squad-formation-field {
-    margin-top: 15px;
-    height: 600px;
-    background: linear-gradient(180deg, rgba(163,56,125,1), rgba(122,45,128,1) 100%);
-    position: relative;
+  margin-top: 15px;
+  height: 600px;
+  background: linear-gradient(
+    180deg,
+    rgba(163, 56, 125, 1),
+    rgba(122, 45, 128, 1) 100%
+  );
+  position: relative;
 }
 
 .squad-middle {
-    width: 100%;
-    height: 1px;
-    border-top: solid 1px #a44f8d;
-    position: absolute;
-    top: 50%;
-    left: 0;
+  width: 100%;
+  height: 1px;
+  border-top: solid 1px #a44f8d;
+  position: absolute;
+  top: 50%;
+  left: 0;
 }
 
 .squad-middle-circle {
-    height: 80px;
-    width: 80px;
-    border: solid 1px #a44f8d;
-    border-radius: 50%;
-    position: absolute;
-    left: calc(50% - 40px);
-    top: calc(50% - 40px);
+  height: 80px;
+  width: 80px;
+  border: solid 1px #a44f8d;
+  border-radius: 50%;
+  position: absolute;
+  left: calc(50% - 40px);
+  top: calc(50% - 40px);
 }
 
 .search-results {
-    overflow-y: scroll;
-    height: 555px;
-    border-bottom: solid 1px #dadada;
+  overflow-y: scroll;
+  height: 555px;
+  border-bottom: solid 1px #dadada;
 }
 
 .search-results-item {
-    padding: 20px;
-    background: linear-gradient(180deg, rgba(255,255,255,1), rgba(233,233,233,1) 100%);;
-    border: dashed 2px #dfdfdf;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-bottom: 15px;
+  padding: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1),
+    rgba(233, 233, 233, 1) 100%
+  );
+  border: dashed 2px #dfdfdf;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 15px;
 }
 
 .first-item-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .name-value,
 .age-value,
 .nationatily-value {
-    color: #c9314c;
+  color: #c9314c;
 }
 
 .squad-spots {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-
 .squad-spots-row {
-    height: 19.5%;
-    /* border: solid 1px black; */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
+  height: 19.5%;
+  /* border: solid 1px black; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
 }
 
 .spots-col {
-    position: relative;
-    /* display: flex;
+  position: relative;
+  /* display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center; */
-    height: 100%;
-    width: 25%;
-    /* border: solid 1px; */
+  height: 100%;
+  width: 25%;
+  /* border: solid 1px; */
 }
 
 .spot-border {
-    position: absolute;
-    left: 10%;
-    top: 10%;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border-style: dashed;
-    border-color:#ac7cc2;
-    padding: 5px;
-    margin-top: 10px;
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-style: dashed;
+  border-color: #ac7cc2;
+  padding: 5px;
+  margin-top: 10px;
 }
 
 .spot-text {
-    width: 100%;
-    height: 100%;
-    background-color: #d49cbe;
-    border: solid 0.5px black;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #fff;
-    font-size: 25px;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #d49cbe;
+  border: solid 0.5px black;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+  font-size: 25px;
+  justify-content: center;
 }
 
 .actions-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .submit-button {
-    width: 320px;
-    background: linear-gradient(180deg, rgba(151,52,126,1), rgba(126,46,127,1) 100%);
-    color: white;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.5s;
-    border: unset;
+  width: 320px;
+  background: linear-gradient(
+    180deg,
+    rgba(151, 52, 126, 1),
+    rgba(126, 46, 127, 1) 100%
+  );
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+  border: unset;
 }
 
 .submit-button:hover {
-    cursor: pointer;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
 }
 
 .error-message {
-    margin-block-start: 5px;
-    font-size: 12px;
-    color: red;
+  margin-block-start: 5px;
+  font-size: 12px;
+  color: red;
 }
 
+/* tooltip */
+.spots-col {
+  position: relative;
+}
+
+.spots-col .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 999;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.spots-col .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.spots-col:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+/* tooltip */
 @media screen and (max-width: 1100px) {
-    .team-info-row,
-    .squad-config-row {
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-    }
+  .team-info-row,
+  .squad-config-row {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .first-column,
-    .second-column {
-        width: calc(100% - 20px);
-    }
+  .first-column,
+  .second-column {
+    width: calc(100% - 20px);
+  }
 
-    .second-column {
-        margin-top: 15px;
-    }
+  .second-column {
+    margin-top: 15px;
+  }
 
-    .description-input,
-    .tags-input {
-        width: calc(100% - 20px);
-    }
+  .description-input,
+  .tags-input {
+    width: calc(100% - 20px);
+  }
 }
-
