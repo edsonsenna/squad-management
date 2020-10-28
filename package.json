@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hookform/error-message": "^0.0.4",
     "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.6",
+    "@types/testing-library__react": "^10.2.0",
     "@types/uuid": "^8.3.0",
     "axios": "^0.21.0",
     "mutationobserver-shim": "^0.3.7",
@@ -46,6 +48,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "^7.12.1",
+    "@testing-library/dom": "^7.26.3",
     "@testing-library/jest-dom": "^5.11.5",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5"

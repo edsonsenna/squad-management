@@ -67,6 +67,7 @@ table {
   margin: 0 5px;
 }
 
+.tooltip:hover,
 .action-icon:hover {
   cursor: pointer;
 }

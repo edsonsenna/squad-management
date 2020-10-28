@@ -8,7 +8,7 @@ import 'mutationobserver-shim';
 import Create from './Create';
 import squads from '../../reducers';
 
-test("it has to render items after search", () => {
+test("it has to render items after search", async () => {
 
     const store = createStore(squads)
     const { getByLabelText } = render(
@@ -20,5 +20,4 @@ test("it has to render items after search", () => {
     );
     const input = getByLabelText('Search Players');
     expect(input).not.toBeNull();
-
 })

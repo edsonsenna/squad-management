@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { v4 } from 'uuid';
+import { ErrorMessage } from '@hookform/error-message';
 
 import Card from '../../components/Card/Card';
 import './Create.css';
@@ -313,13 +314,14 @@ const Create = () => {
                 id='name'
                 name='name'
                 ref={register({
-                  required: true
+                  required: "This is a required field."
                 })}
                 style={{ borderColor: errors?.name ? 'red' : '#dadada' }}
                 type='text'
                 placeholder='Insert team name'
                 className='team-name-input'
               />
+              <ErrorMessage errors={errors} name="name" render={({message}) => <p className='error-message'>{message}</p> }/>
             </div>
 
             <div className='editable-field'>
@@ -344,7 +346,7 @@ const Create = () => {
                 id='website'
                 name='website'
                 ref={register({
-                  required: true,
+                  required: "This is a required field.",
                   pattern: /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/i
                 })}
                 style={{ borderColor: errors?.website ? 'red' : '#dadada' }}
@@ -352,6 +354,7 @@ const Create = () => {
                 placeholder='http://myteam.com'
                 className='team-website-input'
               />
+              <ErrorMessage errors={errors} name="website" render={({message}) => <p className='error-message'>{message ? message : 'The website address must be a valid url.'}</p> }/>
             </div>
 
             <div className='radio-group-wrapper'>
@@ -452,13 +455,14 @@ const Create = () => {
               </label>
               <input
                 id='search-name'
+                data-testid='search-name'
                 type='text'
                 placeholder='Player name'
                 className='search-name-input'
                 onKeyUp={handleSearch}
               />
             </div>
-            <div className='search-results'>{displayPlayersList()}</div>
+            <div data-testid='search-results' className='search-results'>{displayPlayersList()}</div>
           </div>
         </div>
         <div className='actions-row'>

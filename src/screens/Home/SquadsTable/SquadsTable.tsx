@@ -26,7 +26,7 @@ const SquadsTable = () => {
 
   const handleDeleteClick = (event: MouseEvent, squad: Squad) => {
     event.preventDefault();
-    if(window.confirm('Are you about deleting this squad?')) {
+    if(window.confirm('Are you sure about deleting this squad?')) {
       dispatch({ type: 'DELETE_SQUAD', squad });
     }
   }
@@ -46,16 +46,16 @@ const SquadsTable = () => {
           <td className='description-cell'>
             <span>{squad.description}</span>
             <div className='row-actions'>
-              <div className="tooltip">
-                <FaTrash fontWeight={200} className='action-icon delete-icon' onClick={(event) => handleDeleteClick(event, squad)} />
+              <div className="tooltip" onClick={(event) => handleDeleteClick(event, squad)}>
+                <FaTrash fontWeight={200} className='action-icon delete-icon' />
                 <span className="tooltiptext">Delete</span>
               </div>
               <div className="tooltip">
                 <FaShareAlt className='action-icon' />
                 <span className="tooltiptext">Share</span>
               </div>
-              <div className="tooltip">
-                <FaPen className='action-icon' onClick={(event) => handleEditClick(event, squad)}/>
+              <div className="tooltip" onClick={(event) => handleEditClick(event, squad)}>
+                <FaPen className='action-icon' />
                 <span className="tooltiptext">Edit</span>
               </div>
             </div>
